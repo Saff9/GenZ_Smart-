@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Thoughts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <div class="logo-text">Free Thoughts</div>
+        <!-- Menu Button (Hamburger) -->
+        <div class="menu-button" onclick="toggleMenu()">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+    </header>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown" id="menuDropdown">
+        <a href="#about" class="menu-link" onclick="setCurrentSection('about'); toggleMenu();">About</a>
+        <a href="#articles" class="menu-link" onclick="setCurrentSection('articles'); toggleMenu();">Articles</a>
+        <a href="mailto:saffanakbar942@gmail.com" class="menu-link">Contact</a>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <!-- Articles Section -->
+        <section id="articles">
+            <h2>Articles</h2>
+            <textarea placeholder="Write your article..." rows="5" style="width:100%;"></textarea>
+            <button>Submit</button>
+            <div id="article-list"></div>
+            <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
+            <button class="back-to-previous" onclick="scrollToPrevious()">Back to About</button>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <h2>About</h2>
+            <p>Hi, I am Owais Dar, a High School student.</p>
+            <img src="image.jpg" alt="About Image">
+            <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
+            <button class="back-to-previous" onclick="scrollToPrevious()">Back to Articles</button>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: saffanakbar942@gmail.com</p>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        2025 @ All rights reserved.
+    </footer>
+
+    <!-- Script to Handle Navigation -->
+    <script>
+        let currentSection = 'articles'; // Keep track of the current section
+        
+        // Function to toggle the menu visibility
+        function toggleMenu() {
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('show-menu');
+        }
+
+        // Function to scroll smoothly to the top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Function to scroll to the previous section
+        function scrollToPrevious() {
+            if (currentSection === 'about') {
+                document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
+            } else if (currentSection === 'articles') {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Function to set the current section
+        function setCurrentSection(section) {
+            currentSection = section;
+        }
+    </script>
+</body>
+</html>
