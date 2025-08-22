@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GenZ Smart LearnX</title>
+  <meta name="theme-color" content="#7c3aed" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">X</div>
+        <div>
+          <div class="title">GenZ Smart LearnX</div>
+          <div class="sub">Folders ➜ Chapters ➜ Drag videos • Firebase sync</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="themeBtn" class="btn">Theme</button>
+        <div id="authArea"></div>
+      </div>
+    </header>
+
+    <div id="errorArea"></div>
+
+    <section class="layout">
+      <aside class="pane">
+        <div class="pane-head">
+          <div>
+            <strong>Folders</strong>
+            <div class="small">Drag to reorder / nest</div>
+          </div>
+          <div class="actions">
+            <button id="addFolderBtn" class="btn">+ Folder</button>
+          </div>
+        </div>
+        <div id="folders" class="tree" aria-live="polite"></div>
+      </aside>
+
+      <section class="pane">
+        <div class="pane-head">
+          <div>
+            <strong id="folderTitle">Select a folder</strong>
+            <div class="small">Chapters in folder</div>
+          </div>
+          <div class="actions">
+            <button id="addChapterBtn" class="btn">+ Chapter</button>
+          </div>
+        </div>
+        <div id="chapters" class="list"></div>
+      </section>
+
+      <main class="pane">
+        <div class="pane-head">
+          <div>
+            <strong id="chapterTitle">Select a chapter</strong>
+            <div class="small">Drag & drop videos / files here</div>
+          </div>
+          <div class="actions items-toolbar">
+            <input id="search" class="input" type="text" placeholder="Search videos..." />
+            <select id="sort" class="input">
+              <option value="order">Sort: Custom</option>
+              <option value="updated">Sort: Updated</option>
+              <option value="created">Sort: Created</option>
+              <option value="title">Sort: Title</option>
+            </select>
+            <input id="fileInput" type="file" accept="video/*,application/pdf,image/*" multiple hidden />
+            <button id="uploadBtn" class="btn primary">Upload</button>
+          </div>
+        </div>
+        <div id="dropHint" class="drop-hint">Drop files here to upload</div>
+        <div id="items" class="grid"></div>
+      </main>
+    </section>
+
+    <div id="modalRoot"></div>
+    <div id="dropLayer" class="droplayer"></div>
+  </div>
+
+  <!-- SortableJS for smooth drag & drop -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <!-- Firebase compat SDKs (auth, firestore, storage) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+  <script src="firebase.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
