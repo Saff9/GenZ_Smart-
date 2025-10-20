@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenZ Smart — Ideas & Feed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    
+    <style>
+        :root {
+            --bg: #0b1220;
+            --panel: #0f1724;
+            --muted: #98aac6;
+            --text: #e6f0ff;
+            --divider: rgba(255, 255, 255, 0.04);
+            --accent-blue: #1d9bf0;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-ghost: rgba(29, 155, 240, 0.14);
+            --radius: 16px;
+            --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+            --gradient: linear-gradient(135deg, #1d9bf0, #8b5cf6);
+            --gradient-bg: linear-gradient(135deg, #0b1220, #1e293b);
+        }
+
+        .light {
+            --bg: #f7fafc;
+            --panel: #ffffff;
+            --muted: #6b7280;
+            --text: #0b1220;
+            --divider: rgba(0, 0, 0, 0.06);
+            --accent-blue: #1d4ed8;
+            --accent-purple: #7c3aed;
+            --accent-pink: #db2777;
+            --shadow: 0 6px 18px rgba(12, 18, 34, 0.06);
+            --gradient: linear-gradient(135deg, #1d4ed8, #7c3aed);
+            --gradient-bg: linear-gradient(135deg, #f7fafc, #e2e8f0);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--gradient-bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.6;
+        }
+
+        .app {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 16px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 8px;
+            background: linear-gradient(180deg, rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.7));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: var(--gradient);
+            font-weight: 700;
+            font-family: Poppins;
+            color: white;
+            box-shadow: 0 4px 12px rgba(29, 155, 240, 0.3);
+        }
+
+        .title {
+            font-weight: 700;
+            font-family: Poppins;
+            font-size: 18px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 0;
+            color: var(--text);
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            margin-top: 16px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius);
+            overflow-x: auto;
+        }
+
+        .nav-link {
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            background: var(--accent-ghost);
+            color: var(--accent-blue);
+        }
+
+        .hero {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: var(--radius);
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: Poppins;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .hero-quote {
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--divider);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(2, 6, 23, 0.8);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-family: Poppins;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .card-content {
+            color: var(--text);
+        }
+
+        .post {
+            padding: 16px;
+            border-radius: var(--radius);
+            background: var(--panel);
+            border: 1px solid var(--divider);
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .post:hover {
+            border-color: rgba(29, 155, 240, 0.3);
+            box-shadow: 0 4px 12px rgba(2, 6, 23, 0.4);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--gradient);
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+        }
+
+        .post-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .post-meta {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .post-content {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--divider);
+        }
+
+        .post-action {
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .post-action:hover {
+            color: var(--accent-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--divider);
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            background: var(--panel);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--divider);
+            box-shadow: var(--shadow);
+        }
+
+        .admin-toggle {
+            background: var(--gradient);
+            color: white;
+            border: 0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .admin-form {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--divider);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(29, 155, 240, 0.05);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--gradient);
+            color: white;
+            border: 0;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(29, 155, 240, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid var(--divider);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--panel);
+            border-radius: var(--radius);
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--divider);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-family: Poppins;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .app {
+                padding: 20px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 16px;
+            }
+            
+            .hero-title {
+                font-size: 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 8px; }
+        .mb-2 { margin-bottom: 16px; }
+        .mb-3 { margin-bottom: 24px; }
+        .mt-1 { margin-top: 8px; }
+        .mt-2 { margin-top: 16px; }
+        .mt-3 { margin-top: 24px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="brand">
+                <div class="logo">GZ</div>
+                <div>
+                    <div class="title">GenZ Smart</div>
+                    <div style="font-size:12px;color:var(--muted)">Ideas • Thoughts • Motivation</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="adminLoginBtn" class="icon-btn" title="Admin Login">
+                    <i class="fas fa-user-lock"></i>
+                </button>
+            </div>
+        </header>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link active">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="blog.html" class="nav-link">
+                <i class="fas fa-blog"></i> Blog
+            </a>
+            <a href="about.html" class="nav-link">
+                <i class="fas fa-user"></i> About
+            </a>
+            <a href="contact.html" class="nav-link">
+                <i class="fas fa-envelope"></i> Contact
+            </a>
+        </nav>
+
+        <!-- Admin Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Admin Login</div>
+                    <div class="modal-subtitle">Sign in to create and manage posts</div>
+                </div>
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="cancelLogin">Cancel</button>
+                    <button class="btn" id="submitLogin">Sign In</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <section class="admin-panel fade-in" id="adminPanel" style="display: none;">
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fas fa-edit"></i> Create New Post
+                </div>
+                <button class="icon-btn" id="logoutBtn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label for="postTitle" class="form-label">Post Title</label>
+                <input type="text" id="postTitle" class="form-input" placeholder="Enter a catchy title...">
+            </div>
+            
+            <div class="form-group">
+                <label for="postContent" class="form-label">Post Content</label>
+                <textarea id="postContent" class="form-textarea" placeholder="Share your ideas, thoughts, or motivation..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="postCategory" class="form-label">Category</label>
+                <select id="postCategory" class="form-input">
+                    <option value="motivation">Motivation</option>
+                    <option value="productivity">Productivity</option>
+                    <option value="mindset">Mindset</option>
+                    <option value="life-lessons">Life Lessons</option>
+                    <option value="personal-growth">Personal Growth</option>
+                </select>
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button class="btn" id="publishPost">
+                    <i class="fas fa-paper-plane"></i> Publish Post
+                </button>
+                <button class="btn btn-secondary" id="clearForm">
+                    Clear
+                </button>
+            </div>
+        </section>
+
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <div class="hero-title">Ideas that spark. Thoughts that grow.</div>
+                <div class="hero-quote" id="heroQuote">"Small steps every day lead to big results."</div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-1">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-fire" style="color: var(--accent-pink);"></i> Recent Posts
+                    </div>
+                    <a href="blog.html" style="color: var(--accent-blue); text-decoration: none; font-size: 14px; font-weight: 600;">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="card-content" id="postsContainer">
+                    <div class="empty-state">
+                        <i class="fas fa-feather"></i>
+                        <h3>Loading Posts...</h3>
+                        <p>Please wait while we load the latest content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-3">
+            <div class="card" style="background: var(--gradient); color: white;">
+                <div class="card-header">
+                    <div class="card-title" style="color: white;">
+                        <i class="fas fa-quote-left"></i> Quote of the Day
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div style="font-size: 18px; font-style: italic; margin-bottom: 12px;">
+                        "The only way to do great work is to love what you do."
+                    </div>
+                    <div style="font-weight: 600;">- Steve Jobs</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> GenZ Smart — Made with ❤ in Kashmir
+        </footer>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgjMRRlmsOlX5EsNbPLmFAYrDxKmIEmUc",
+            authDomain: "genz-owaisblog.firebaseapp.com",
+            databaseURL: "https://genz-owaisblog-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "genz-owaisblog",
+            storageBucket: "genz-owaisblog.firebasestorage.app",
+            messagingSenderId: "104507541594",
+            appId: "1:104507541594:web:b4212217a4cedc83927063"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        if (localStorage.siteTheme === undefined) localStorage.siteTheme = 'dark';
+        applyTheme(localStorage.siteTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            applyTheme(localStorage.siteTheme === 'dark' ? 'light' : 'dark');
+        });
+        
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.classList.add('light');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                document.documentElement.classList.remove('light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            localStorage.siteTheme = t;
+        }
+
+        // Update hero quote randomly
+        const quotes = [
+            "Small steps every day lead to big results.",
+            "Your mindset determines your success.",
+            "Growth happens outside your comfort zone.",
+            "Consistency beats intensity every time.",
+            "Believe you can and you're halfway there."
+        ];
+        
+        const heroQuote = document.getElementById('heroQuote');
+        let currentQuoteIndex = 0;
+        
+        setInterval(() => {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            heroQuote.textContent = `"${quotes[currentQuoteIndex]}"`;
+        }, 5000);
+
+        // Authentication and Content Management
+        const adminPanel = document.getElementById('adminPanel');
+        const loginModal = document.getElementById('loginModal');
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const cancelLogin = document.getElementById('cancelLogin');
+        const submitLogin = document.getElementById('submitLogin');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const publishPost = document.getElementById('publishPost');
+        const clearForm = document.getElementById('clearForm');
+        const postsContainer = document.getElementById('postsContainer');
+
+        let currentUser = null;
+        let postsListener = null;
+
+        // Admin credentials (you should change these!)
+        const ADMIN_EMAIL = "admin@genzsmart.com";
+        const ADMIN_PASSWORD = "genzsmart123";
+
+        // Show login modal
+        adminLoginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        // Hide login modal
+        cancelLogin.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+        });
+
+        // Submit login
+        submitLogin.addEventListener('click', async () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            try {
+                // For demo purposes, using simple check
+                // In a real app, you'd use Firebase Auth properly
+                if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                    currentUser = { email: ADMIN_EMAIL };
+                    localStorage.setItem('genz-admin', 'true');
+                    adminPanel.style.display = 'block';
+                    loginModal.style.display = 'none';
+                    document.getElementById('loginEmail').value = '';
+                    document.getElementById('loginPassword').value = '';
+                    showToast('Successfully logged in as admin!', 'success');
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            localStorage.removeItem('genz-admin');
+            adminPanel.style.display = 'none';
+            showToast('Logged out successfully', 'info');
+        });
+
+        // Check if already logged in
+        if (localStorage.getItem('genz-admin') === 'true') {
+            currentUser = { email: ADMIN_EMAIL };
+            adminPanel.style.display = 'block';
+        }
+
+        // Publish new post
+        publishPost.addEventListener('click', async () => {
+            if (!currentUser) {
+                alert('Please log in first');
+                return;
+            }
+
+            const title = document.getElementById('postTitle').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+            const category = document.getElementById('postCategory').value;
+
+            if (!title || !content) {
+                alert('Please fill in both title and content');
+                return;
+            }
+
+            try {
+                const post = {
+                    title,
+                    content,
+                    category,
+                    author: 'Owais Ahmad',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    likes: 0,
+                    comments: 0
+                };
+
+                await db.collection('posts').add(post);
+                
+                // Clear form
+                document.getElementById('postTitle').value = '';
+                document.getElementById('postContent').value = '';
+                
+                showToast('Post published successfully!', 'success');
+            } catch (error) {
+                console.error('Error publishing post:', error);
+                alert('Failed to publish post: ' + error.message);
+            }
+        });
+
+        // Clear form
+        clearForm.addEventListener('click', () => {
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+        });
+
+        // Load posts from Firestore
+        function loadPosts() {
+            // Clear existing listener if any
+            if (postsListener) {
+                postsListener();
+            }
+
+            postsListener = db.collection('posts')
+                .orderBy('timestamp', 'desc')
+                .limit(5)
+                .onSnapshot(snapshot => {
+                    const posts = [];
+                    snapshot.forEach(doc => {
+                        posts.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+
+                    displayPosts(posts);
+                }, error => {
+                    console.error('Error loading posts:', error);
+                    postsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Error Loading Posts</h3>
+                            <p>Please check your connection and try again.</p>
+                        </div>
+                    `;
+                });
+        }
+
+        // Display posts in the UI
+        function displayPosts(posts) {
+            if (posts.length === 0) {
+                postsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-feather"></i>
+                        <h3>No Posts Yet</h3>
+                        <p>Be the first to share an idea!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            postsContainer.innerHTML = '';
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                
+                const postDate = post.timestamp ? 
+                    new Date(post.timestamp.seconds * 1000).toLocaleDateString() : 
+                    'Recent';
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="post-info">
+                            <div class="post-title">${post.title}</div>
+                            <div class="post-meta">${postDate} • ${post.category} • By ${post.author}</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                    <div class="post-actions">
+                        <button class="post-action" onclick="likePost('${post.id}')">
+                            <i class="far fa-heart"></i> ${post.likes || 0}
+                        </button>
+                        <button class="post-action">
+                            <i class="far fa-comment"></i> ${post.comments || 0}
+                        </button>
+                        <button class="post-action">
+                            <i class="far fa-bookmark"></i> Save
+                        </button>
+                        ${currentUser ? `
+                        <button class="post-action" onclick="deletePost('${post.id}')" style="margin-left: auto; color: #ef4444;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        ` : ''}
+                    </div>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Like a post
+        window.likePost = async function(postId) {
+            try {
+                const postRef = db.collection('posts').doc(postId);
+                const postDoc = await postRef.get();
+                
+                if (postDoc.exists) {
+                    const currentLikes = postDoc.data().likes || 0;
+                    await postRef.update({
+                        likes: currentLikes + 1
+                    });
+                }
+            } catch (error) {
+                console.error('Error liking post:', error);
+            }
+        };
+
+        // Delete a post
+        window.deletePost = async function(postId) {
+            if (!currentUser) {
+                alert('Please log in to delete posts');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this post?')) {
+                return;
+            }
+
+            try {
+                await db.collection('posts').doc(postId).delete();
+                showToast('Post deleted successfully', 'info');
+            } catch (error) {
+                console.error('Error deleting post:', error);
+                alert('Failed to delete post: ' + error.message);
+            }
+        };
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for toast animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize the app
+        loadPosts();
+    </script>
+</body>
+</html>
