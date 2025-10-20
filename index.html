@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenZ Smart — Ideas & Feed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0b1220;
+            --panel: #0f1724;
+            --muted: #98aac6;
+            --text: #e6f0ff;
+            --divider: rgba(255, 255, 255, 0.04);
+            --accent-blue: #1d9bf0;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-ghost: rgba(29, 155, 240, 0.14);
+            --radius: 16px;
+            --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+            --gradient: linear-gradient(135deg, #1d9bf0, #8b5cf6);
+            --gradient-bg: linear-gradient(135deg, #0b1220, #1e293b);
+        }
+
+        .light {
+            --bg: #f7fafc;
+            --panel: #ffffff;
+            --muted: #6b7280;
+            --text: #0b1220;
+            --divider: rgba(0, 0, 0, 0.06);
+            --accent-blue: #1d4ed8;
+            --accent-purple: #7c3aed;
+            --accent-pink: #db2777;
+            --shadow: 0 6px 18px rgba(12, 18, 34, 0.06);
+            --gradient: linear-gradient(135deg, #1d4ed8, #7c3aed);
+            --gradient-bg: linear-gradient(135deg, #f7fafc, #e2e8f0);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--gradient-bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.6;
+        }
+
+        .app {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 16px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 8px;
+            background: linear-gradient(180deg, rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.7));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: var(--gradient);
+            font-weight: 700;
+            font-family: Poppins;
+            color: white;
+            box-shadow: 0 4px 12px rgba(29, 155, 240, 0.3);
+        }
+
+        .title {
+            font-weight: 700;
+            font-family: Poppins;
+            font-size: 18px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 0;
+            color: var(--text);
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            margin-top: 16px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius);
+            overflow-x: auto;
+        }
+
+        .nav-link {
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            background: var(--accent-ghost);
+            color: var(--accent-blue);
+        }
+
+        .hero {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: var(--radius);
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: Poppins;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .hero-quote {
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--divider);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(2, 6, 23, 0.8);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-family: Poppins;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .card-content {
+            color: var(--text);
+        }
+
+        .post {
+            padding: 16px;
+            border-radius: var(--radius);
+            background: var(--panel);
+            border: 1px solid var(--divider);
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .post:hover {
+            border-color: rgba(29, 155, 240, 0.3);
+            box-shadow: 0 4px 12px rgba(2, 6, 23, 0.4);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--gradient);
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+        }
+
+        .post-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .post-meta {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .post-content {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--divider);
+        }
+
+        .post-action {
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .post-action:hover {
+            color: var(--accent-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--divider);
+        }
+
+        @media (min-width: 768px) {
+            .app {
+                padding: 20px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 16px;
+            }
+            
+            .hero-title {
+                font-size: 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 8px; }
+        .mb-2 { margin-bottom: 16px; }
+        .mb-3 { margin-bottom: 24px; }
+        .mt-1 { margin-top: 8px; }
+        .mt-2 { margin-top: 16px; }
+        .mt-3 { margin-top: 24px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="brand">
+                <div class="logo">GZ</div>
+                <div>
+                    <div class="title">GenZ Smart</div>
+                    <div style="font-size:12px;color:var(--muted)">Ideas • Thoughts • Motivation</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link active">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="blog.html" class="nav-link">
+                <i class="fas fa-blog"></i> Blog
+            </a>
+            <a href="about.html" class="nav-link">
+                <i class="fas fa-user"></i> About
+            </a>
+            <a href="contact.html" class="nav-link">
+                <i class="fas fa-envelope"></i> Contact
+            </a>
+        </nav>
+
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <div class="hero-title">Ideas that spark. Thoughts that grow.</div>
+                <div class="hero-quote" id="heroQuote">"Small steps every day lead to big results."</div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-1">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-fire" style="color: var(--accent-pink);"></i> Featured Ideas
+                    </div>
+                    <a href="blog.html" style="color: var(--accent-blue); text-decoration: none; font-size: 14px; font-weight: 600;">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="card-content">
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="post-info">
+                                <a href="#" class="post-title">The Power of Consistency</a>
+                                <div class="post-meta">May 15, 2023 • 3 min read</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Small, consistent actions compound over time to create remarkable results. It's not about intensity but consistency that builds lasting habits and skills.
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">
+                                <i class="far fa-heart"></i> 24
+                            </button>
+                            <button class="post-action">
+                                <i class="far fa-comment"></i> 8
+                            </button>
+                            <button class="post-action">
+                                <i class="far fa-bookmark"></i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="post-info">
+                                <a href="#" class="post-title">Mindful Productivity</a>
+                                <div class="post-meta">May 10, 2023 • 4 min read</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Being busy doesn't equal being productive. Focus on meaningful work that aligns with your goals, and practice mindfulness to maintain clarity and purpose.
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">
+                                <i class="far fa-heart"></i> 32
+                            </button>
+                            <button class="post-action">
+                                <i class="far fa-comment"></i> 12
+                            </button>
+                            <button class="post-action">
+                                <i class="far fa-bookmark"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-bolt" style="color: var(--accent-purple);"></i> Recent Activity
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.03); margin-bottom: 12px;">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-blue);"></div>
+                        <div style="font-size: 14px;">Published new idea: <strong>Growth Mindset Principles</strong></div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.03); margin-bottom: 12px;">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-pink);"></div>
+                        <div style="font-size: 14px;">Updated blog with <strong>5 new motivational quotes</strong></div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.03);">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-purple);"></div>
+                        <div style="font-size: 14px;">Reached <strong>1000 followers</strong> on Instagram</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-3">
+            <div class="card" style="background: var(--gradient); color: white;">
+                <div class="card-header">
+                    <div class="card-title" style="color: white;">
+                        <i class="fas fa-quote-left"></i> Quote of the Day
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div style="font-size: 18px; font-style: italic; margin-bottom: 12px;">
+                        "The only way to do great work is to love what you do."
+                    </div>
+                    <div style="font-weight: 600;">- Steve Jobs</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> GenZ Smart — Made with ❤ in Kashmir
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        if (localStorage.siteTheme === undefined) localStorage.siteTheme = 'dark';
+        applyTheme(localStorage.siteTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            applyTheme(localStorage.siteTheme === 'dark' ? 'light' : 'dark');
+        });
+        
+        function applyTheme(t) {
+            if (t === 'light') {
+                document.documentElement.classList.add('light');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                document.documentElement.classList.remove('light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            localStorage.siteTheme = t;
+        }
+
+        const quotes = [
+            "Small steps every day lead to big results.",
+            "Your mindset determines your success.",
+            "Growth happens outside your comfort zone.",
+            "Consistency beats intensity every time.",
+            "Believe you can and you're halfway there."
+        ];
+        
+        const heroQuote = document.getElementById('heroQuote');
+        let currentQuoteIndex = 0;
+        
+        setInterval(() => {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            heroQuote.textContent = `"${quotes[currentQuoteIndex]}"`;
+        }, 5000);
+    </script>
+</body>
+</html>
