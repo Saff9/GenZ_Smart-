@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Owais Ahmad | GenZ Smart</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn more about Owais Ahmad, creator of GenZ Smart Community">
+    <meta name="keywords" content="owais ahmad, genz smart, about, kashmir, student">
+    <meta name="author" content="Owais Ahmad">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="dark" data-page="about">
+
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+            </div>
+            <div class="brand-text">
+                <div class="site-title">GenZ Smart</div>
+                <div class="site-subtitle">Community • Ideas • Motivation</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="clock-container">
+                <div class="clock-time" id="clockTime">00:00:00</div>
+                <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
+            
+            <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="menuBtn" class="icon-btn" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="blog.html" class="nav-link">
+            <i class="fas fa-book"></i> Blog
+        </a>
+        <a href="about.html" class="nav-link active">
+            <i class="fas fa-user"></i> About
+        </a>
+        <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
+            <i class="fas fa-cog"></i> Admin
+        </a>
+    </nav>
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero-section">
+        <div class="about-banner"></div>
+        <div class="about-profile">
+            <div class="profile-image">
+                <img src="assets/your-photo.jpg" alt="Owais Ahmad" id="profilePhoto">
+                <div class="profile-status"></div>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">Owais Ahmad</h1>
+                <p class="profile-tagline">Ideas • Notes • Motivation</p>
+                <p class="profile-location"><i class="fas fa-map-marker-alt"></i> Kashmir, India</p>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="stat-number" id="aboutPostCount">0</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">1K+</div>
+                        <div class="stat-label">Readers</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">2023</div>
+                        <div class="stat-label">Started</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT CONTENT -->
+    <section class="section">
+        <div class="about-content">
+            <div class="about-section">
+                <h2><i class="fas fa-user-graduate"></i> About Me</h2>
+                <p>Hey there! I'm Owais Ahmad, a high school student born and raised in the breathtaking valleys of Kashmir, India. I'm passionate about learning new things, exploring creative ideas, and making each day count.</p>
+                
+                <p>I've got a curious mind, a drive to grow, and a dream to create something meaningful in this world. Whether it's diving into books, exploring tech, or just enjoying the peace of the mountains—I'm always looking for inspiration.</p>
+                
+                <p>I believe in staying positive, working hard, and never stopping the hustle. Still young, but dreaming big and I'm just getting started. Let's make it happen!</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-heart"></i> My Interests</h2>
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Technology</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-book"></i>
+                        <span>Reading</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-mountain"></i>
+                        <span>Nature</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Ideas</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>Writing</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-share-alt"></i> Connect With Me</h2>
+                <div class="social-buttons">
+                    <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-btn youtube">
+                        <i class="fab fa-youtube"></i> <span>YouTube</span>
+                    </a>
+                    <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i> <span>Instagram</span>
+                    </a>
+                    <a href="mailto:youremail@gmail.com" class="social-btn email">
+                        <i class="fas fa-envelope"></i> <span>Email</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-bullseye"></i> My Mission</h2>
+                <p>I created GenZ Smart to build a community where young minds can share ideas, find motivation, and support each other's growth. This platform is all about:</p>
+                
+                <ul class="mission-list">
+                    <li><i class="fas fa-check"></i> Sharing knowledge and experiences</li>
+                    <li><i class="fas fa-check"></i> Building meaningful connections</li>
+                    <li><i class="fas fa-check"></i> Inspiring creativity and innovation</li>
+                    <li><i class="fas fa-check"></i> Creating a positive digital space</li>
+                    <li><i class="fas fa-check"></i> Learning and growing together</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <span>GenZ Smart</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 GenZ Smart Blog — All rights reserved
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Drawer (menu) -->
+<div id="drawerBackdrop" style="display:none"></div>
+<nav id="drawer">
+    <button id="closeDrawer" style="background:transparent;border:0;color:var(--text);font-size:18px">✕</button>
+    <div style="margin-top:15px">
+        <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+        
+        <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
+            <div class="clock-time" id="drawerClockTime">00:00:00</div>
+            <div class="clock-date" id="drawerClockDate">Loading...</div>
+        </div>
+        
+        <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
+        <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
+        <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
+        <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
+        <div style="height:1px;background:var(--divider);margin:12px 0"></div>
+        <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
+        <button id="drawerLogout" style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+</nav>
+
+<!-- Toast area -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- JavaScript -->
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
