@@ -1,38 +1,52 @@
-/* ========== ENHANCED COLOR SCHEME ========== */
+/* ========== ENHANCED PROFESSIONAL COLOR SCHEME ========== */
 :root {
-    --bg: #0a0a0a;
+    --bg: #0f0f0f;
     --panel: #1a1a1a;
-    --muted: #a0a0a0;
+    --muted: #888888;
     --text: #ffffff;
-    --divider: rgba(255, 255, 255, 0.1);
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    --accent: #ff6b6b;
-    --accent-light: #ff8e8e;
-    --accent-gradient: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-    --radius: 16px;
-    --gradient-start: #ff6b6b;
-    --gradient-end: #ff8e8e;
-    --secondary: #4ecdc4;
-    --tertiary: #45b7d1;
-    --success: #1dd1a1;
-    --warning: #feca57;
-    --danger: #ff9ff3;
-    --info: #54a0ff;
-    --purple: #a55eea;
+    --divider: rgba(255, 255, 255, 0.08);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    
+    /* New Professional Color Scheme */
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --accent-gradient: linear-gradient(135deg, #6366f1, #818cf8);
+    --radius: 12px;
+    --gradient-start: #6366f1;
+    --gradient-end: #818cf8;
+    
+    /* Complementary colors */
+    --secondary: #10b981;
+    --tertiary: #f59e0b;
+    --success: #22c55e;
+    --warning: #eab308;
+    --danger: #ef4444;
+    --info: #3b82f6;
+    --purple: #8b5cf6;
 }
 
 .light {
-    --bg: #f0f2f5;
+    --bg: #f8fafc;
     --panel: #ffffff;
-    --muted: #6c757d;
-    --text: #2d3436;
-    --divider: rgba(0, 0, 0, 0.1);
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    --accent: #e84393;
-    --accent-light: #fd79a8;
-    --accent-gradient: linear-gradient(135deg, #e84393, #fd79a8);
-    --gradient-start: #e84393;
-    --gradient-end: #fd79a8;
+    --muted: #64748b;
+    --text: #1e293b;
+    --divider: rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    
+    /* Light theme colors */
+    --accent: #4f46e5;
+    --accent-light: #6366f1;
+    --accent-gradient: linear-gradient(135deg, #4f46e5, #6366f1);
+    --gradient-start: #4f46e5;
+    --gradient-end: #6366f1;
+    
+    --secondary: #059669;
+    --tertiary: #d97706;
+    --success: #16a34a;
+    --warning: #ca8a04;
+    --danger: #dc2626;
+    --info: #2563eb;
+    --purple: #7c3aed;
 }
 
 * {
