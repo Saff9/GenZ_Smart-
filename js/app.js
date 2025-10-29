@@ -4,7 +4,326 @@ import {
   getFirestore, collection, addDoc, updateDoc, deleteDoc, doc,
   onSnapshot, query, orderBy, serverTimestamp, getDoc, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+// ========== ENHANCED LOGIN SYSTEM ==========
+let isAdmin = false;
+const ADMIN_EMAIL = 'saffanakbar942@gmail.com';
+const ADMIN_PASS = 'saffan942';
 
+// Enhanced login functionality
+function initLoginSystem() {
+    const openLogin = document.getElementById('openLogin');
+    const loginModal = document.getElementById('loginModal');
+    const loginCancel = document.getElementById('loginCancel');
+    const loginSubmit = document.getElementById('loginSubmit');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+
+    // Open login modal
+    if (openLogin) {
+        openLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Login button clicked');
+            
+            // Close drawer if open
+            const drawer = document.getElementById('drawer');
+            const drawerBackdrop = document.getElementById('drawerBackdrop');
+            if (drawer) drawer.style.left = '-100%';
+            if (drawerBackdrop) drawerBackdrop.style.display = 'none';
+            
+            // Show login modal
+            if (loginModal) {
+                loginModal.style.display = 'flex';
+                // Clear previous inputs
+                if (loginEmail) loginEmail.value = '';
+                if (loginPassword) loginPassword.value = '';
+                // Focus on email field
+                setTimeout(() => {
+                    if (loginEmail) loginEmail.focus();
+                }, 300);
+            }
+        });
+    }
+
+    // Close login modal
+    if (loginCancel) {
+        loginCancel.addEventListener('click', () => {
+            console.log('Login cancelled');
+            if (loginModal) loginModal.style.display = 'none';
+        });
+    }
+
+    // Login submission
+    if (loginSubmit) {
+        loginSubmit.addEventListener('click', handleLogin);
+    }
+
+    // Enter key support for login
+    if (loginPassword) {
+        loginPassword.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                console.log('Enter key pressed in password field');
+                handleLogin();
+            }
+        });
+    }
+
+    // Close modal when clicking outside
+    if (loginModal) {
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                console.log('Clicked outside modal - closing');
+                loginModal.style.display = 'none';
+            }
+        });
+    }
+}
+
+function handleLogin() {
+    console.log('Login attempt started');
+    
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    const loginModal = document.getElementById('loginModal');
+    const loginSubmit = document.getElementById('loginSubmit');
+    
+    if (!loginEmail || !loginPassword || !loginSubmit) {
+        console.error('Login elements not found');
+        return;
+    }
+    
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+    
+    console.log('Login attempt with:', { email, password });
+    
+    if (!email || !password) {
+        toast('Please enter both email and password', 'err');
+        return;
+    }
+    
+    // Show loading state
+    const originalText = loginSubmit.innerHTML;
+    loginSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    loginSubmit.disabled = true;
+    
+    // Check credentials
+    setTimeout(() => {
+        console.log('Checking credentials...');
+        
+        if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
+            console.log('Login successful');
+            isAdmin = true;
+            
+            if (loginModal) loginModal.style.display = 'none';
+            
+            // Update UI for admin
+            updateAdminUI();
+            toast('Welcome back, Admin! 👋', 'ok');
+            
+            // Show composer if it exists
+            const composer = document.getElementById('composer');
+            if (composer) {
+                composer.style.display = 'flex';
+                console.log('Composer shown');
+            }
+            
+        } else {
+            console.log('Login failed - invalid credentials');
+            toast('Invalid email or password', 'err');
+            
+            // Shake animation for error
+            if (loginModal) {
+                loginModal.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    loginModal.style.animation = '';
+                }, 500);
+            }
+        }
+        
+        // Reset button
+        loginSubmit.innerHTML = originalText;
+        loginSubmit.disabled = false;
+    }, 800);
+}
+
+function updateAdminUI() {
+    console.log('Updating admin UI...');
+    
+    const elements = {
+        adminNavLink: document.getElementById('adminNavLink'),
+        adminDrawerLink: document.getElementById('adminDrawerLink'),
+        drawerLogout: document.getElementById('drawerLogout'),
+        openLogin: document.getElementById('openLogin'),
+        composeQuickLink: document.getElementById('composeQuickLink'),
+        adminTab: document.getElementById('adminTab'),
+        adminPanel: document.getElementById('adminPanel')
+    };
+    
+    // Show admin elements
+    if (elements.adminNavLink) {
+        elements.adminNavLink.style.display = 'flex';
+        console.log('Admin nav link shown');
+    }
+    if (elements.adminDrawerLink) {
+        elements.adminDrawerLink.style.display = 'block';
+        console.log('Admin drawer link shown');
+    }
+    if (elements.drawerLogout) {
+        elements.drawerLogout.style.display = 'block';
+        console.log('Drawer logout shown');
+    }
+    if (elements.adminTab) {
+        elements.adminTab.style.display = 'flex';
+        console.log('Admin tab shown');
+    }
+    if (elements.adminPanel) {
+        elements.adminPanel.style.display = 'block';
+        console.log('Admin panel shown');
+    }
+    
+    // Hide login button
+    if (elements.openLogin) {
+        elements.openLogin.style.display = 'none';
+        console.log('Open login hidden');
+    }
+    
+    // Show quick compose link if exists
+    if (elements.composeQuickLink) {
+        elements.composeQuickLink.style.display = 'flex';
+        console.log('Compose quick link shown');
+    }
+}
+
+function logout() {
+    console.log('Logging out...');
+    isAdmin = false;
+    
+    const elements = {
+        composer: document.getElementById('composer'),
+        adminNavLink: document.getElementById('adminNavLink'),
+        adminDrawerLink: document.getElementById('adminDrawerLink'),
+        drawerLogout: document.getElementById('drawerLogout'),
+        openLogin: document.getElementById('openLogin'),
+        composeQuickLink: document.getElementById('composeQuickLink'),
+        adminTab: document.getElementById('adminTab'),
+        adminPanel: document.getElementById('adminPanel')
+    };
+    
+    // Hide admin elements
+    if (elements.composer) {
+        elements.composer.style.display = 'none';
+        console.log('Composer hidden');
+    }
+    if (elements.adminNavLink) {
+        elements.adminNavLink.style.display = 'none';
+        console.log('Admin nav link hidden');
+    }
+    if (elements.adminDrawerLink) {
+        elements.adminDrawerLink.style.display = 'none';
+        console.log('Admin drawer link hidden');
+    }
+    if (elements.drawerLogout) {
+        elements.drawerLogout.style.display = 'none';
+        console.log('Drawer logout hidden');
+    }
+    if (elements.adminTab) {
+        elements.adminTab.style.display = 'none';
+        console.log('Admin tab hidden');
+    }
+    if (elements.adminPanel) {
+        elements.adminPanel.style.display = 'none';
+        console.log('Admin panel hidden');
+    }
+    
+    // Show login button
+    if (elements.openLogin) {
+        elements.openLogin.style.display = 'block';
+        console.log('Open login shown');
+    }
+    
+    // Hide quick compose link if exists
+    if (elements.composeQuickLink) {
+        elements.composeQuickLink.style.display = 'none';
+        console.log('Compose quick link hidden');
+    }
+    
+    toast('Logged out successfully', 'ok');
+    
+    // If on admin view, switch to home
+    if (currentView === 'admin') {
+        console.log('Switching from admin view to home');
+        showView('home');
+        // Update active tab
+        document.querySelectorAll('.tab').forEach(tab => {
+            if (tab.getAttribute('data-view') === 'home') {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Add shake animation for login errors
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px); }
+        50% { transform: translateX(8px); }
+        75% { transform: translateX(-8px); }
+    }
+`;
+document.head.appendChild(shakeStyle);
+
+// Initialize login system when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing login system...');
+    initLoginSystem();
+    
+    // Add logout event listeners
+    const logoutBtn = document.getElementById('logoutBtn');
+    const drawerLogout = document.getElementById('drawerLogout');
+    
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+        console.log('Logout button listener added');
+    }
+    if (drawerLogout) {
+        drawerLogout.addEventListener('click', logout);
+        console.log('Drawer logout listener added');
+    }
+    
+    // Check if already logged in (from localStorage)
+    if (localStorage.getItem('isAdmin') === 'true') {
+        console.log('Found admin in localStorage - auto logging in');
+        isAdmin = true;
+        updateAdminUI();
+    }
+    
+    // Save admin state to localStorage when logging in/out
+    const originalLogout = logout;
+    window.logout = function() {
+        localStorage.setItem('isAdmin', 'false');
+        originalLogout();
+    };
+    
+    const originalHandleLogin = handleLogin;
+    window.handleLogin = function() {
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        
+        if (loginEmail && loginPassword) {
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value.trim();
+            
+            if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
+                localStorage.setItem('isAdmin', 'true');
+            }
+        }
+        originalHandleLogin();
+    };
+});
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBZTAhJne3gOVwBrZ_NHQFo0ubWR8HzNL8",
