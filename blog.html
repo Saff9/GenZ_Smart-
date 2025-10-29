@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — GenZ Smart Articles</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Browse all articles and posts from GenZ Smart Community">
+    <meta name="keywords" content="genz blog, articles, posts, community content">
+    <meta name="author" content="Owais Ahmad">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="dark" data-page="blog">
+
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+            </div>
+            <div class="brand-text">
+                <div class="site-title">GenZ Smart</div>
+                <div class="site-subtitle">Community • Ideas • Motivation</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="clock-container">
+                <div class="clock-time" id="clockTime">00:00:00</div>
+                <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
+            
+            <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="menuBtn" class="icon-btn" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="blog.html" class="nav-link active">
+            <i class="fas fa-book"></i> Blog <span class="badge" id="badgeCount">0</span>
+        </a>
+        <a href="about.html" class="nav-link">
+            <i class="fas fa-user"></i> About
+        </a>
+        <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
+            <i class="fas fa-cog"></i> Admin
+        </a>
+    </nav>
+
+    <!-- BLOG HEADER -->
+    <section class="section">
+        <div class="section-header">
+            <h1><i class="fas fa-book"></i> All Articles</h1>
+            <p>Browse through all posts and articles from our community</p>
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="blog-controls">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInputBlog" class="search-bar" placeholder="Search all posts...">
+            </div>
+            
+            <div class="filter-options">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">All Categories</option>
+                    <option value="thoughts">Thoughts</option>
+                    <option value="tech">Tech</option>
+                    <option value="motivation">Motivation</option>
+                    <option value="ideas">Ideas</option>
+                    <option value="life">Life</option>
+                </select>
+                
+                <select id="sortFilter" class="filter-select">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="popular">Most Liked</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div id="allFeed" class="posts-grid"></div>
+        
+        <!-- Load More Button -->
+        <div class="section-footer">
+            <button id="loadMoreBtn" class="btn-ghost" style="display:none">
+                <i class="fas fa-plus"></i> Load More Posts
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <span>GenZ Smart</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 GenZ Smart Blog — All rights reserved
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Drawer (menu) -->
+<div id="drawerBackdrop" style="display:none"></div>
+<nav id="drawer">
+    <button id="closeDrawer" style="background:transparent;border:0;color:var(--text);font-size:18px">✕</button>
+    <div style="margin-top:15px">
+        <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+        
+        <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
+            <div class="clock-time" id="drawerClockTime">00:00:00</div>
+            <div class="clock-date" id="drawerClockDate">Loading...</div>
+        </div>
+        
+        <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
+        <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
+        <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
+        <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
+        <div style="height:1px;background:var(--divider);margin:12px 0"></div>
+        <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
+        <button id="drawerLogout" style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+</nav>
+
+<!-- Toast area -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- JavaScript -->
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
