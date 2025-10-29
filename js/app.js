@@ -33,7 +33,7 @@ const quill = new Quill('#editor-container', {
     placeholder: 'Share something with your community...',
 });
 
-// ========== ENHANCED LOGIN SYSTEM ==========
+// ========== GLOBAL STATE ==========
 let isAdmin = false;
 let currentView = 'home';
 let lastViewBeforePost = 'home';
@@ -45,7 +45,7 @@ let unsub = null;
 const ADMIN_EMAIL = 'saffanakbar942@gmail.com';
 const ADMIN_PASS = 'saffan942';
 
-// Helper functions
+// ========== HELPER FUNCTIONS ==========
 function toast(msg, type='ok'){
     const wrap = document.getElementById('toastWrap');
     if (!wrap) return;
@@ -93,6 +93,50 @@ function linkifySafe(text) {
     return escaped.replace(/(https?:\/\/[^\s]+)/g, url => 
         `<a href="${url}" target="_blank" rel="noopener" style="color:var(--accent)">${url}</a>`
     );
+}
+
+// ========== THEME MANAGEMENT ==========
+function applyTheme(t){ 
+    if(t === 'light') {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    localStorage.siteTheme = t; 
+}
+
+// ========== CLOCK FUNCTIONALITY ==========
+function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    const date = now.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    });
+    
+    const clockTime = document.getElementById('clockTime');
+    const clockDate = document.getElementById('clockDate');
+    const drawerClockTime = document.getElementById('drawerClockTime');
+    const drawerClockDate = document.getElementById('drawerClockDate');
+    
+    if (clockTime) clockTime.textContent = time;
+    if (clockDate) clockDate.textContent = date;
+    if (drawerClockTime) drawerClockTime.textContent = time;
+    if (drawerClockDate) drawerClockDate.textContent = date;
+    
+    if (clockTime) {
+        clockTime.style.animation = 'none';
+        void clockTime.offsetWidth;
+        clockTime.style.animation = 'clockTick 0.5s ease';
+    }
 }
 
 // ========== LOGIN SYSTEM ==========
@@ -290,6 +334,45 @@ function showView(v){
     }
     
     window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ========== TAB NAVIGATION ==========
+function initTabNavigation() {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t => {
+        t.addEventListener('click', () => {
+            // Remove active class from all tabs
+            tabs.forEach(x => x.classList.remove('active')); 
+            
+            // Add active class to clicked tab
+            t.classList.add('active');
+            
+            // Get the view to show
+            const view = t.getAttribute('data-view');
+            
+            // Special handling for admin tab
+            if (view === 'admin' && !isAdmin) {
+                toast('Please login as admin first', 'err');
+                // Switch back to home tab
+                tabs.forEach(tab => {
+                    if (tab.getAttribute('data-view') === 'home') {
+                        tab.classList.add('active');
+                    }
+                });
+                return;
+            }
+            
+            showView(view);
+            
+            // Close drawer if open
+            const drawer = document.getElementById('drawer');
+            const drawerBackdrop = document.getElementById('drawerBackdrop');
+            if (drawer) {
+                drawer.style.left = '-100%'; 
+                if (drawerBackdrop) drawerBackdrop.style.display = 'none';
+            }
+        });
+    });
 }
 
 // ========== ADMIN FUNCTIONALITY ==========
@@ -692,6 +775,7 @@ async function deletePost(id) {
     }
 }
 
+// ========== SINGLE POST VIEW ==========
 function openSinglePost(id, data) {
     const postTitle = document.getElementById('postTitle');
     const postBody = document.getElementById('postBody');
@@ -701,6 +785,7 @@ function openSinglePost(id, data) {
     const postCategory = document.getElementById('postCategory');
     const postAdminActions = document.getElementById('postAdminActions');
     const postView = document.getElementById('postView');
+    const postBack = document.getElementById('postBack');
     
     if (postTitle) postTitle.textContent = data.title || '';
     if (postBody) postBody.innerHTML = data.content || '';
@@ -782,6 +867,15 @@ function openSinglePost(id, data) {
             postAdminActions.appendChild(editBtn);
             postAdminActions.appendChild(deleteBtn);
         }
+    }
+
+    // Set up back button
+    if (postBack) {
+        postBack.onclick = () => {
+            if(lastViewBeforePost === 'blog') showView('blog'); 
+            else showView('home');
+            document.title = 'GenZ Smart — Community';
+        };
     }
 
     hideAllViews();
@@ -905,6 +999,9 @@ function initApp() {
     // Initialize login system
     initLoginSystem();
     
+    // Initialize tab navigation
+    initTabNavigation();
+    
     // Initialize admin functionality
     initAdminFunctionality();
     
@@ -916,48 +1013,6 @@ function initApp() {
     
     // Show home view
     showView('home');
-}
-
-function applyTheme(t){ 
-    if(t === 'light') {
-        document.body.classList.remove('dark');
-        document.body.classList.add('light');
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    } else {
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-    localStorage.siteTheme = t; 
-}
-
-function updateClock() {
-    const now = new Date();
-    const time = now.toLocaleTimeString();
-    const date = now.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    });
-    
-    const clockTime = document.getElementById('clockTime');
-    const clockDate = document.getElementById('clockDate');
-    const drawerClockTime = document.getElementById('drawerClockTime');
-    const drawerClockDate = document.getElementById('drawerClockDate');
-    
-    if (clockTime) clockTime.textContent = time;
-    if (clockDate) clockDate.textContent = date;
-    if (drawerClockTime) drawerClockTime.textContent = time;
-    if (drawerClockDate) drawerClockDate.textContent = date;
-    
-    if (clockTime) {
-        clockTime.style.animation = 'none';
-        void clockTime.offsetWidth;
-        clockTime.style.animation = 'clockTick 0.5s ease';
-    }
 }
 
 function initEventListeners() {
@@ -1001,31 +1056,6 @@ function initEventListeners() {
         });
     }
     
-    // Tabs navigation
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(t => {
-        t.addEventListener('click', () => {
-            tabs.forEach(x => x.classList.remove('active')); 
-            t.classList.add('active');
-            const view = t.getAttribute('data-view');
-            showView(view);
-            if (drawer) {
-                drawer.style.left = '-100%'; 
-                if (drawerBackdrop) drawerBackdrop.style.display = 'none';
-            }
-        });
-    });
-    
-    // Back from single post
-    const postBack = document.getElementById('postBack');
-    if (postBack) {
-        postBack.addEventListener('click', () => {
-            if(lastViewBeforePost === 'blog') showView('blog'); 
-            else showView('home');
-            document.title = 'GenZ Smart — Community';
-        });
-    }
-    
     // Refresh button
     const refreshBtn = document.getElementById('refreshBtn');
     if (refreshBtn) {
@@ -1040,11 +1070,11 @@ function initEventListeners() {
     if (backHome) {
         backHome.addEventListener('click', () => {
             showView('home');
-            tabs.forEach(t => {
-                if(t.getAttribute('data-view') === 'home') {
-                    t.classList.add('active');
+            document.querySelectorAll('.tab').forEach(tab => {
+                if(tab.getAttribute('data-view') === 'home') {
+                    tab.classList.add('active');
                 } else {
-                    t.classList.remove('active');
+                    tab.classList.remove('active');
                 }
             });
         });
@@ -1124,6 +1154,18 @@ function filterPosts(query, container, posts) {
         });
     }
 }
+
+// Add shake animation for login errors
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px); }
+        50% { transform: translateX(8px); }
+        75% { transform: translateX(-8px); }
+    }
+`;
+document.head.appendChild(shakeStyle);
 
 // Dynamic hero quotes
 const quotes = [
@@ -1246,9 +1288,7 @@ function createPinnedPost() {
 }
 
 // Create pinned post on home page
-if (document.body.getAttribute('data-page') === 'home') {
-    createPinnedPost();
-}
+createPinnedPost();
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initApp);
