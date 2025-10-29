@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenZ Smart — Community & Ideas</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="GenZ Smart Community - Share ideas, motivation, and connect with like-minded individuals">
+    <meta name="keywords" content="genz, community, ideas, motivation, blog, articles">
+    <meta name="author" content="Owais Ahmad">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="GenZ Smart — Community & Ideas">
+    <meta property="og:description" content="Join our vibrant community for ideas, motivation and connections">
+    <meta property="og:image" content="assets/logo.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="dark" data-page="home">
+
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+            </div>
+            <div class="brand-text">
+                <div class="site-title">GenZ Smart</div>
+                <div class="site-subtitle">Community • Ideas • Motivation</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <!-- Clock and Date -->
+            <div class="clock-container">
+                <div class="clock-time" id="clockTime">00:00:00</div>
+                <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
+            
+            <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="menuBtn" class="icon-btn" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link active">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="blog.html" class="nav-link">
+            <i class="fas fa-book"></i> Blog <span class="badge" id="badgeCount">0</span>
+        </a>
+        <a href="about.html" class="nav-link">
+            <i class="fas fa-user"></i> About
+        </a>
+        <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
+            <i class="fas fa-cog"></i> Admin
+        </a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero reveal">
+        <div class="hero-card">
+            <div class="hero-title">Welcome to GenZ Smart</div>
+            <div id="heroQuote" class="hero-quote">"Small ideas, big ripples."</div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value" id="postCount">0</div>
+                    <div class="stat-label">Total Posts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="userCount">1</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">7+</div>
+                    <div class="stat-label">Days Active</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pinned Post -->
+    <div class="pinned-post" id="pinnedPostContainer">
+        <div class="pinned-badge">📌 Featured</div>
+        <div class="post-card" id="pinnedPost">
+            <!-- Pinned post will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Recent Posts Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Recent Posts</h2>
+            <p>Latest updates from the community</p>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search recent posts...">
+        </div>
+
+        <div id="homeFeed" class="posts-grid"></div>
+        
+        <div class="section-footer">
+            <a href="blog.html" class="btn-primary">
+                <i class="fas fa-book-open"></i> View All Posts
+            </a>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-rocket"></i> Quick Access</h2>
+        </div>
+        <div class="quick-links">
+            <a href="blog.html" class="quick-link">
+                <div class="quick-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <span>All Articles</span>
+            </a>
+            <a href="about.html" class="quick-link">
+                <div class="quick-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>About Me</span>
+            </a>
+            <div class="quick-link" id="composeQuickLink" style="display:none">
+                <div class="quick-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <span>New Post</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <span>GenZ Smart</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 GenZ Smart Blog — All rights reserved
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Drawer (menu) -->
+<div id="drawerBackdrop" style="display:none"></div>
+<nav id="drawer">
+    <!-- Drawer content same as before -->
+</nav>
+
+<!-- Toast area -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- JavaScript -->
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
