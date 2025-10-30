@@ -1,14 +1,25 @@
-your-website/
-├── index.html          (Homepage)
-├── blog.html          (All articles)
-├── about.html         (Your profile)
-├── admin.html         (Admin panel)
-├── styles/
-│   └── main.css       (Common styles)
-├── js/
-│   └── app.js         (Common JavaScript)
-├── assets/
+GenZSmart/
+├── 📄 index.html
+├── 📄 blog.html
+├── 📄 about.html
+├── 📄 admin.html
+├── 📄 analytics.html (NEW)
+├── 📄 comments.html (NEW)
+├── 📄 settings.html (NEW)
+├── 📄 offline.html (NEW)
+├── 📁 styles/
+│   ├── main.css
+│   ├── analytics.css (NEW)
+│   └── comments.css (NEW)
+├── 📁 js/
+│   ├── app.js
+│   ├── analytics.js (NEW)
+│   ├── comments.js (NEW)
+│   ├── service-worker.js (NEW)
+│   └── notifications.js (NEW)
+├── 📁 assets/
+│   ├── logo.png
 │   ├── favicon.ico
 │   ├── your-photo.jpg
-│   └── logo.png
-└── vercel.json        (Vercel config)
+│   └── icons/ (NEW)
+└── 📄 manifest.json (NEW)
