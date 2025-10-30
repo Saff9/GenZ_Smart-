@@ -1,52 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — GenZ Smart</title>
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Owais Ahmad | GenZ Smart Founder</title>
+    
+    <!-- Favicon & PWA -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d9bf0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn more about Owais Ahmad, creator of GenZ Smart Community. 50K+ readers community from Kashmir, India.">
+    <meta name="keywords" content="owais ahmad, genz smart, about, kashmir, student, founder, community builder">
+    <meta name="author" content="Owais Ahmad">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
+<body class="dark" data-page="about">
 
-  <header class="navbar">
-    <div class="logo">GenZ Smart</div>
-    <nav>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="blog.html" class="nav-link">Blog</a>
-      <a href="about.html" class="nav-link active">About</a>
-      <a href="login.html" class="nav-link">Admin Login</a>
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+            </div>
+            <div class="brand-text">
+                <div class="site-title">GenZ Smart</div>
+                <div class="site-subtitle">Community • Ideas • Motivation</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="online-status" id="onlineStatus" title="Online">
+                <div class="status-dot"></div>
+                <span>Online</span>
+            </div>
+            
+            <div class="clock-container">
+                <div class="clock-time" id="clockTime">00:00:00</div>
+                <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
+            
+            <div class="notification-container">
+                <button id="notificationBell" class="icon-btn" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none">0</span>
+                </button>
+            </div>
+            
+            <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="menuBtn" class="icon-btn" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="blog.html" class="nav-link">
+            <i class="fas fa-book"></i> Blog
+        </a>
+        <a href="comments.html" class="nav-link">
+            <i class="fas fa-comments"></i> Comments
+        </a>
+        <a href="about.html" class="nav-link active">
+            <i class="fas fa-user"></i> About
+        </a>
+        <a href="analytics.html" class="nav-link">
+            <i class="fas fa-chart-line"></i> Analytics
+        </a>
+        <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
+            <i class="fas fa-cog"></i> Admin
+        </a>
     </nav>
-  </header>
 
-  <main class="about-section">
-    <h1>About GenZ Smart</h1>
-    <p>
-      GenZ Smart is a platform that empowers young thinkers to share, explore, and grow their ideas into meaningful discussions.  
-      We believe in the power of small ideas making big ripples across generations.
-    </p>
+    <!-- ABOUT HERO -->
+    <section class="about-hero-section">
+        <div class="about-banner" id="aboutBanner" style="background: linear-gradient(135deg, rgba(29, 155, 240, 0.8), rgba(120, 86, 255, 0.8)), var(--accent-gradient);">
+            <button class="banner-upload-btn" id="bannerUploadBtn" style="display: none;">
+                <i class="fas fa-camera"></i> Change Cover
+            </button>
+            <input type="file" id="bannerUploadInput" accept="image/*" style="display: none;">
+        </div>
+        <div class="about-profile">
+            <div class="profile-image">
+                <img src="assets/your-photo.jpg" alt="Owais Ahmad" id="profilePhoto">
+                <div class="profile-status"></div>
+                <button class="photo-upload-btn" id="photoUploadBtn" style="display: none;">
+                    <i class="fas fa-camera"></i>
+                </button>
+                <input type="file" id="photoUploadInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">Owais Ahmad</h1>
+                <p class="profile-tagline">Ideas • Notes • Motivation • Community Builder</p>
+                <p class="profile-location"><i class="fas fa-map-marker-alt"></i> Kashmir, India</p>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="stat-number" id="aboutPostCount">10</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Readers</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">69+</div>
+                        <div class="stat-label">Active</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">2023</div>
+                        <div class="stat-label">Started</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="about-stats">
-      <div class="stat-card">
-        <h3>Readers</h3>
-        <p>50K+</p>
-      </div>
-      <div class="stat-card">
-        <h3>Total Posts</h3>
-        <p id="aboutPostCount">24</p>
-      </div>
+    <!-- ABOUT CONTENT -->
+    <section class="section">
+        <div class="about-content">
+            <div class="about-section">
+                <h2><i class="fas fa-user-graduate"></i> About Me</h2>
+                <p>Hey there! I'm Owais Ahmad, a high school student born and raised in the breathtaking valleys of Kashmir, India. I'm passionate about learning new things, exploring creative ideas, and making each day count.</p>
+                
+                <p>I've got a curious mind, a drive to grow, and a dream to create something meaningful in this world. Whether it's diving into books, exploring tech, or just enjoying the peace of the mountains—I'm always looking for inspiration.</p>
+                
+                <p>I believe in staying positive, working hard, and never stopping the hustle. Still young, but dreaming big and I'm just getting started. Let's make it happen!</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-heart"></i> My Interests</h2>
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Technology</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-book"></i>
+                        <span>Reading</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-mountain"></i>
+                        <span>Nature</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Ideas</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>Writing</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Growth</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-globe"></i>
+                        <span>Travel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-share-alt"></i> Connect With Me</h2>
+                <div class="social-buttons">
+                    <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-btn youtube">
+                        <i class="fab fa-youtube"></i> <span>YouTube</span>
+                    </a>
+                    <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i> <span>Instagram</span>
+                    </a>
+                    <a href="mailto:youremail@gmail.com" class="social-btn email">
+                        <i class="fas fa-envelope"></i> <span>Email</span>
+                    </a>
+                    <a href="#" class="social-btn twitter">
+                        <i class="fab fa-twitter"></i> <span>Twitter</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-bullseye"></i> My Mission</h2>
+                <p>I created GenZ Smart to build a community where young minds can share ideas, find motivation, and support each other's growth. This platform is all about:</p>
+                
+                <ul class="mission-list">
+                    <li><i class="fas fa-check"></i> Sharing knowledge and experiences</li>
+                    <li><i class="fas fa-check"></i> Building meaningful connections</li>
+                    <li><i class="fas fa-check"></i> Inspiring creativity and innovation</li>
+                    <li><i class="fas fa-check"></i> Creating a positive digital space</li>
+                    <li><i class="fas fa-check"></i> Learning and growing together</li>
+                    <li><i class="fas fa-check"></i> Empowering young entrepreneurs</li>
+                </ul>
+            </div>
+
+            <!-- Skills & Expertise -->
+            <div class="about-section">
+                <h2><i class="fas fa-star"></i> Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Community Building</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Content Creation</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Web Development</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Digital Marketing</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY FEATURES SECTION -->
+    <section class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-shield-alt"></i> Security & Privacy</h2>
+            <p>Your safety is our priority</p>
+        </div>
+        
+        <div class="security-features">
+            <div class="security-badge">
+                <div class="security-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="security-info">
+                    <h4>Secure Authentication</h4>
+                    <p>Encrypted admin login system with rate limiting</p>
+                </div>
+            </div>
+            <div class="security-badge">
+                <div class="security-icon" style="background: var(--info);">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="security-info">
+                    <h4>Data Protection</h4>
+                    <p>Firebase secured database with encryption</p>
+                </div>
+            </div>
+            <div class="security-badge">
+                <div class="security-icon" style="background: var(--warning);">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="security-info">
+                    <h4>Privacy First</h4>
+                    <p>No unnecessary data collection</p>
+                </div>
+            </div>
+            <div class="security-badge">
+                <div class="security-icon" style="background: var(--success);">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <div class="security-info">
+                    <h4>Content Moderation</h4>
+                    <p>Automated and manual content review</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <span>GenZ Smart</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="comments.html">Comments</a>
+                <a href="about.html">About</a>
+                <a href="analytics.html">Analytics</a>
+                <a href="settings.html">Settings</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:youremail@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 GenZ Smart Blog — All rights reserved • <span id="currentYear">2025</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Drawer (menu) -->
+<div id="drawerBackdrop" style="display:none"></div>
+<nav id="drawer">
+    <button id="closeDrawer" style="background:transparent;border:0;color:var(--text);font-size:18px">✕</button>
+    <div style="margin-top:15px">
+        <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+        
+        <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
+            <div class="clock-time" id="drawerClockTime">00:00:00</div>
+            <div class="clock-date" id="drawerClockDate">Loading...</div>
+        </div>
+        
+        <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
+        <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
+        <div style="margin-top:6px"><a href="comments.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-comments"></i> Comments</a></div>
+        <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
+        <div style="margin-top:6px"><a href="analytics.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-chart-line"></i> Analytics</a></div>
+        <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
+        <div style="height:1px;background:var(--divider);margin:12px 0"></div>
+        <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
+        <button id="drawerLogout" style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
-  </main>
+</nav>
 
-  <footer>
-    <p>© 2025 GenZ Smart — All Rights Reserved</p>
-  </footer>
+<!-- Login Modal -->
+<div id="loginModal" class="login-modal">
+    <div class="login-card">
+        <div class="login-header">
+            <h3 class="login-title">Admin Login</h3>
+            <p class="login-subtitle">Sign in to access admin features</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="loginEmail"><i class="fas fa-envelope"></i> Admin Email</label>
+                <input type="email" id="loginEmail" class="login-input" placeholder="Enter your admin email" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password" required>
+                <button type="button" id="togglePassword" class="password-toggle">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="login-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberMe">
+                    <span class="checkmark"></span>
+                    Remember me
+                </label>
+                <a href="#" id="forgotPassword" class="text-link">Forgot password?</a>
+            </div>
+            
+            <div class="login-actions">
+                <button type="button" id="loginCancel" class="btn-ghost">Cancel</button>
+                <button type="submit" id="loginSubmit" class="btn-primary">Sign In</button>
+            </div>
+        </form>
+        
+        <div class="security-notice">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure admin authentication</span>
+        </div>
+    </div>
+</div>
 
-  <script src="js/auth.js"></script>
+<!-- Toast area -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- Offline Indicator -->
+<div id="offlineIndicator" class="offline-indicator">
+    <i class="fas fa-wifi"></i>
+    <span>You are currently offline</span>
+</div>
+
+<!-- Scripts -->
+<script type="module" src="js/app.js"></script>
+<script src="js/notifications.js"></script>
 </body>
 </html>
