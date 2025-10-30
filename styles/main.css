@@ -1,0 +1,266 @@
+/* ======================================================
+   GenZ Smart — Modern UI (Twitter + Substack inspired)
+   ====================================================== */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f7f9fc, #ffffff);
+  color: #222;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #1da1f2, #ff784e);
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  opacity: 0.8;
+}
+
+/* Hero Section (Home) */
+.hero-section {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.hero-section span {
+  color: #1da1f2;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+/* Stats Cards */
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  gap: 1.2rem;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card h3 {
+  color: #1da1f2;
+  margin-bottom: 0.5rem;
+}
+
+/* About Page */
+.about-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.about-section h1 {
+  font-size: 2rem;
+  color: #1da1f2;
+  margin-bottom: 1rem;
+}
+
+.about-section p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.about-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Login Page */
+.login-container {
+  max-width: 400px;
+  margin: 5rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+.login-container h2 {
+  text-align: center;
+  color: #1da1f2;
+  margin-bottom: 1.5rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #1da1f2;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(90deg, #1da1f2, #ff784e);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+  display: none;
+  margin-top: 0.5rem;
+}
+
+/* Admin Panel */
+.admin-panel {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.admin-panel h1 {
+  color: #1da1f2;
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel p {
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.admin-section {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  padding: 2rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.admin-section h2 {
+  color: #ff784e;
+  margin-bottom: 1rem;
+}
+
+.admin-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.admin-section li {
+  margin: 0.4rem 0;
+}
+
+.admin-btn {
+  padding: 0.7rem 1.5rem;
+  margin: 0.5rem;
+  background: linear-gradient(90deg, #1da1f2, #ff784e);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.admin-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Logout Button */
+.logout-btn {
+  background: white;
+  color: #1da1f2;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  background: #fafafa;
+  color: #555;
+  font-size: 0.9rem;
+}
