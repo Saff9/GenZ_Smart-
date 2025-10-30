@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog — GenZ Smart Articles</title>
     
-    <!-- Favicon -->
+    <!-- Favicon & PWA -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d9bf0">
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Browse all articles and posts from GenZ Smart Community">
-    <meta name="keywords" content="genz blog, articles, posts, community content">
+    <meta name="description" content="Browse all articles and posts from GenZ Smart Community. 10+ posts, 50K+ readers community.">
+    <meta name="keywords" content="genz blog, articles, posts, community content, motivation, ideas">
     <meta name="author" content="Owais Ahmad">
+    <meta name="robots" content="index, follow">
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -44,6 +48,12 @@
         </div>
 
         <div class="header-actions">
+            <!-- Online Status -->
+            <div class="online-status" id="onlineStatus" title="Online">
+                <div class="status-dot"></div>
+                <span>Online</span>
+            </div>
+            
             <div class="clock-container">
                 <div class="clock-time" id="clockTime">00:00:00</div>
                 <div class="clock-date" id="clockDate">Loading...</div>
@@ -66,8 +76,14 @@
         <a href="blog.html" class="nav-link active">
             <i class="fas fa-book"></i> Blog <span class="badge" id="badgeCount">0</span>
         </a>
+        <a href="comments.html" class="nav-link">
+            <i class="fas fa-comments"></i> Comments
+        </a>
         <a href="about.html" class="nav-link">
             <i class="fas fa-user"></i> About
+        </a>
+        <a href="analytics.html" class="nav-link">
+            <i class="fas fa-chart-line"></i> Analytics
         </a>
         <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
             <i class="fas fa-cog"></i> Admin
@@ -78,7 +94,27 @@
     <section class="section">
         <div class="section-header">
             <h1><i class="fas fa-book"></i> All Articles</h1>
-            <p>Browse through all posts and articles from our community</p>
+            <p>Browse through all posts and articles from our community of 50K+ readers</p>
+        </div>
+
+        <!-- Blog Stats -->
+        <div class="blog-stats">
+            <div class="stat-item">
+                <i class="fas fa-newspaper"></i>
+                <span><strong id="totalPostsBlog">10</strong> Posts</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span><strong>69+</strong> Active Users</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-eye"></i>
+                <span><strong id="totalViewsBlog">0</strong> Views</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-comments"></i>
+                <span><strong id="totalCommentsBlog">0</strong> Comments</span>
+            </div>
         </div>
 
         <!-- Search & Filters -->
@@ -86,6 +122,9 @@
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" id="searchInputBlog" class="search-bar" placeholder="Search all posts...">
+                <button id="clearSearch" class="clear-search-btn" title="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             
             <div class="filter-options">
@@ -96,24 +135,114 @@
                     <option value="motivation">Motivation</option>
                     <option value="ideas">Ideas</option>
                     <option value="life">Life</option>
+                    <option value="trending">Trending</option>
                 </select>
                 
                 <select id="sortFilter" class="filter-select">
                     <option value="newest">Newest First</option>
                     <option value="oldest">Oldest First</option>
                     <option value="popular">Most Liked</option>
+                    <option value="views">Most Views</option>
+                    <option value="comments">Most Comments</option>
+                </select>
+
+                <select id="timeFilter" class="filter-select">
+                    <option value="all">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
                 </select>
             </div>
         </div>
 
+        <!-- Advanced Filters -->
+        <div class="advanced-filters" id="advancedFilters">
+            <div class="filter-tags" id="filterTags">
+                <!-- Active filters will appear here -->
+            </div>
+            <button id="clearFilters" class="clear-filters-btn">
+                <i class="fas fa-times"></i> Clear All Filters
+            </button>
+        </div>
+
         <!-- Blog Posts Grid -->
-        <div id="allFeed" class="posts-grid"></div>
+        <div id="allFeed" class="posts-grid">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading posts...</p>
+            </div>
+        </div>
         
         <!-- Load More Button -->
         <div class="section-footer">
             <button id="loadMoreBtn" class="btn-ghost" style="display:none">
                 <i class="fas fa-plus"></i> Load More Posts
             </button>
+            <div id="endOfPosts" class="end-message" style="display:none">
+                <i class="fas fa-check-circle"></i>
+                <p>You've reached the end of all posts!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Posts -->
+    <section class="section" id="trendingSection" style="display:none">
+        <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Trending Now</h2>
+            <p>Most popular posts in the last 7 days</p>
+        </div>
+        <div id="trendingFeed" class="posts-grid compact">
+            <!-- Trending posts will appear here -->
+        </div>
+    </section>
+
+    <!-- Categories Overview -->
+    <section class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-tags"></i> Categories</h2>
+            <p>Explore posts by category</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card" data-category="thoughts">
+                <div class="category-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Thoughts</h3>
+                <p>Personal reflections and ideas</p>
+                <div class="category-count" id="countThoughts">0 posts</div>
+            </div>
+            <div class="category-card" data-category="tech">
+                <div class="category-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Tech</h3>
+                <p>Technology insights and updates</p>
+                <div class="category-count" id="countTech">0 posts</div>
+            </div>
+            <div class="category-card" data-category="motivation">
+                <div class="category-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Motivation</h3>
+                <p>Inspiration and productivity tips</p>
+                <div class="category-count" id="countMotivation">0 posts</div>
+            </div>
+            <div class="category-card" data-category="ideas">
+                <div class="category-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Ideas</h3>
+                <p>Creative concepts and innovations</p>
+                <div class="category-count" id="countIdeas">0 posts</div>
+            </div>
+            <div class="category-card" data-category="life">
+                <div class="category-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Life</h3>
+                <p>Life experiences and lessons</p>
+                <div class="category-count" id="countLife">0 posts</div>
+            </div>
         </div>
     </section>
 
@@ -126,10 +255,24 @@
             <div class="footer-links">
                 <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
+                <a href="comments.html">Comments</a>
                 <a href="about.html">About</a>
+                <a href="analytics.html">Analytics</a>
+                <a href="settings.html">Settings</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:youremail@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
             <div class="footer-copyright">
-                © 2025 GenZ Smart Blog — All rights reserved
+                © 2025 GenZ Smart Blog — All rights reserved • <span id="currentYear">2025</span>
             </div>
         </div>
     </footer>
@@ -149,7 +292,9 @@
         
         <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
         <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
+        <div style="margin-top:6px"><a href="comments.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-comments"></i> Comments</a></div>
         <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
+        <div style="margin-top:6px"><a href="analytics.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-chart-line"></i> Analytics</a></div>
         <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
         <div style="height:1px;background:var(--divider);margin:12px 0"></div>
         <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
@@ -157,13 +302,55 @@
     </div>
 </nav>
 
+<!-- Login Modal -->
+<div id="loginModal" class="login-modal">
+    <div class="login-card">
+        <div class="login-header">
+            <h3 class="login-title">Admin Login</h3>
+            <p class="login-subtitle">Sign in to access admin features</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="loginEmail"><i class="fas fa-envelope"></i> Admin Email</label>
+                <input type="email" id="loginEmail" class="login-input" placeholder="Enter your admin email" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password" required>
+                <button type="button" id="togglePassword" class="password-toggle">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="login-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberMe">
+                    <span class="checkmark"></span>
+                    Remember me
+                </label>
+                <a href="#" id="forgotPassword" class="text-link">Forgot password?</a>
+            </div>
+            
+            <div class="login-actions">
+                <button type="button" id="loginCancel" class="btn-ghost">Cancel</button>
+                <button type="submit" id="loginSubmit" class="btn-primary">Sign In</button>
+            </div>
+        </form>
+        
+        <div class="security-notice">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure admin authentication</span>
+        </div>
+    </div>
+</div>
+
 <!-- Toast area -->
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
-<!-- In ALL HTML files -->
+<!-- Scripts -->
 <script type="module" src="js/app.js"></script>
-
-<!-- In admin.html ONLY, add these too: -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="js/blog.js"></script>
+</body>
 </html>
