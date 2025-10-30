@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — GenZ Smart</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body data-page="admin">
+
+  <header class="navbar">
+    <div class="logo">GenZ Smart Admin</div>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <main class="admin-panel">
+    <h1>Welcome, Admin 👋</h1>
+    <p>Manage your posts, users, and analytics from here.</p>
+
+    <section class="admin-section">
+      <h2>Site Overview</h2>
+      <ul>
+        <li><strong>Total Posts:</strong> 24</li>
+        <li><strong>Active Users:</strong> 50+</li>
+        <li><strong>Readers:</strong> 50K+</li>
+        <li><strong>Days Active:</strong> 7+</li>
+      </ul>
+    </section>
+
+    <section class="admin-section">
+      <h2>Quick Actions</h2>
+      <button class="admin-btn">Add New Post</button>
+      <button class="admin-btn">View All Posts</button>
+      <button class="admin-btn">Analytics</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 GenZ Smart Admin Dashboard</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
