@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — GenZ Smart Articles</title>
     
-    <!-- Favicon & PWA -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.gstatic.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com;
+        frame-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    <meta name="referrer-policy" content="no-referrer-when-downgrade">
+    <meta name="X-Content-Type-Options" content="nosniff">
+
+    <title>Blog — GenZ Smart Articles & Community Posts</title>
+    
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1d9bf0">
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Browse all articles and posts from GenZ Smart Community. 10+ posts, 50K+ readers community.">
-    <meta name="keywords" content="genz blog, articles, posts, community content, motivation, ideas">
-    <meta name="author" content="Owais Ahmad">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Browse all articles and posts from GenZ Smart Community. 50K+ readers engaging with ideas, motivation, and tech discussions."> [cite: 70, 71]
+    <meta name="keywords" content="genz blog, articles, posts, community content, motivation, tech ideas"> 
+    <meta name="author" content="Owais Ahmad"> 
     
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="dark" data-page="blog">
 
-<!-- Animated Background -->
 <div class="bg-animation">
     <div class="bg-circle circle-1"></div>
     <div class="bg-circle circle-2"></div>
@@ -35,322 +45,279 @@
 
 <div class="container">
 
-    <!-- HEADER -->
     <header>
         <div class="brand">
             <div class="logo">
-                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;"> [cite: 72, 73]
             </div>
             <div class="brand-text">
                 <div class="site-title">GenZ Smart</div>
-                <div class="site-subtitle">Community • Ideas • Motivation</div>
+                <div class="site-subtitle">Community • Ideas • Motivation</div> [cite: 73]
             </div>
         </div>
 
         <div class="header-actions">
-            <!-- Online Status -->
-            <div class="online-status" id="onlineStatus" title="Online">
+            <div class="online-status" id="onlineStatus" title="Online"> [cite: 74]
                 <div class="status-dot"></div>
                 <span>Online</span>
             </div>
             
             <div class="clock-container">
                 <div class="clock-time" id="clockTime">00:00:00</div>
-                <div class="clock-date" id="clockDate">Loading...</div>
+                <div class="clock-date" id="clockDate">Loading...</div> [cite: 74, 75]
             </div>
             
-            <button id="themeToggle" class="icon-btn" title="Toggle theme">
-                <i class="fas fa-sun"></i>
+            <div class="notification-container">
+                <button id="notificationBell" class="icon-btn" title="Notifications" aria-label="View notifications">
+                    <i class="fas fa-bell" aria-hidden="true"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none">0</span> [cite: 75, 76]
+                </button>
+                </div>
+            
+            <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-sun" aria-hidden="true"></i> [cite: 76, 77]
             </button>
-            <button id="menuBtn" class="icon-btn" title="Menu">
-                <i class="fas fa-bars"></i>
+            <button id="menuBtn" class="icon-btn" title="Menu" aria-label="Open menu">
+                <i class="fas fa-bars" aria-hidden="true"></i> [cite: 77]
             </button>
         </div>
     </header>
 
-    <!-- NAVIGATION -->
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Main navigation">
         <a href="index.html" class="nav-link">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home" aria-hidden="true"></i> Home
         </a>
-        <a href="blog.html" class="nav-link active">
-            <i class="fas fa-book"></i> Blog <span class="badge" id="badgeCount">0</span>
+        <a href="blog.html" class="nav-link active" aria-current="page">
+            <i class="fas fa-book" aria-hidden="true"></i> Blog <span class="badge" id="badgeCount">0</span> [cite: 78]
         </a>
         <a href="comments.html" class="nav-link">
-            <i class="fas fa-comments"></i> Comments
+            <i class="fas fa-comments" aria-hidden="true"></i> Comments [cite: 78]
         </a>
         <a href="about.html" class="nav-link">
-            <i class="fas fa-user"></i> About
+            <i class="fas fa-user" aria-hidden="true"></i> About
         </a>
         <a href="analytics.html" class="nav-link">
-            <i class="fas fa-chart-line"></i> Analytics
+            <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics [cite: 79]
         </a>
         <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
-            <i class="fas fa-cog"></i> Admin
+            <i class="fas fa-cog" aria-hidden="true"></i> Admin [cite: 79]
         </a>
     </nav>
 
-    <!-- BLOG HEADER -->
-    <section class="section">
-        <div class="section-header">
-            <h1><i class="fas fa-book"></i> All Articles</h1>
-            <p>Browse through all posts and articles from our community of 50K+ readers</p>
-        </div>
+    <main>
+        <section class="section" aria-labelledby="blog-page-title">
+            <div class="section-header">
+                <h1 id="blog-page-title"><i class="fas fa-book" aria-hidden="true"></i> All Articles</h1> [cite: 80]
+                <p>Browse through all posts and articles from our community of 50K+ readers</p> [cite: 80]
+            </div>
 
-        <!-- Blog Stats -->
-        <div class="blog-stats">
-            <div class="stat-item">
-                <i class="fas fa-newspaper"></i>
-                <span><strong id="totalPostsBlog">10</strong> Posts</span>
+            <div class="blog-stats" role="region" aria-label="Blog statistics">
+                <div class="stat-item">
+                    <i class="fas fa-newspaper" aria-hidden="true"></i>
+                    <span id="totalPosts">0</span> Posts [cite: 80, 81]
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    <span>50K+</span> Readers [cite: 81]
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-comment" aria-hidden="true"></i>
+                    <span id="totalComments">0</span> Comments [cite: 82]
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span id="totalBlogViews">0</span> Views [cite: 82]
+                </div>
             </div>
-            <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <span><strong>69+</strong> Active Users</span>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-eye"></i>
-                <span><strong id="totalViewsBlog">0</strong> Views</span>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-comments"></i>
-                <span><strong id="totalCommentsBlog">0</strong> Comments</span>
-            </div>
-        </div>
 
-        <!-- Search & Filters -->
-        <div class="blog-controls">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInputBlog" class="search-bar" placeholder="Search all posts...">
-                <button id="clearSearch" class="clear-search-btn" title="Clear search">
-                    <i class="fas fa-times"></i>
-                </button>
+            <div class="blog-controls" role="search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="search" id="searchInputBlog" class="search-bar" placeholder="Search all posts..." aria-label="Search all posts">
+                    <button id="clearSearch" class="clear-search-btn" style="display: none;" aria-label="Clear search">
+                        <i class="fas fa-times" aria-hidden="true"></i> [cite: 84]
+                    </button>
+                </div>
+                
+                <div class="filter-options">
+                    <select id="categoryFilter" class="filter-select" aria-label="Filter by category"> [cite: 85]
+                        <option value="">All Categories</option>
+                        <option value="thoughts">Thoughts</option> [cite: 85]
+                        <option value="tech">Tech</option> [cite: 85]
+                        <option value="motivation">Motivation</option>
+                        <option value="ideas">Ideas</option> [cite: 86]
+                        <option value="life">Life</option> [cite: 86]
+                        <option value="community">Community</option> [cite: 86]
+                    </select>
+                    
+                    <select id="sortFilter" class="filter-select" aria-label="Sort posts"> [cite: 87]
+                        <option value="newest">Newest First</option> [cite: 87]
+                        <option value="oldest">Oldest First</option> [cite: 87]
+                        <option value="popular">Most Popular</option> [cite: 87]
+                        <option value="trending">Trending</option>
+                        <option value="most-commented">Most Commented</option> [cite: 88]
+                    </select>
+                    
+                    <button id="filterToggle" class="icon-btn" aria-label="Toggle advanced filters" aria-expanded="false">
+                        <i class="fas fa-sliders-h" aria-hidden="true"></i> [cite: 88]
+                    </button>
+                </div>
+            </div>
+
+            <div id="advancedFilters" class="advanced-filters" style="display: none;" role="region" aria-label="Advanced filters">
+                <div class="filter-group">
+                    <label for="dateFrom">Date Range:</label>
+                    <input type="date" id="dateFrom" class="filter-date" aria-label="Start date"> [cite: 89]
+                    <span>to</span>
+                    <input type="date" id="dateTo" class="filter-date" aria-label="End date"> [cite: 90]
+                </div>
+                <div class="filter-group">
+                    <label for="minLikes">Minimum Likes:</label>
+                    <input type="number" id="minLikes" class="filter-number" placeholder="0" min="0" aria-label="Minimum likes"> [cite: 90]
+                </div>
+                <div class="filter-group">
+                    <label for="authorFilter">Author:</label>
+                    <select id="authorFilter" class="filter-select" aria-label="Filter by author"> [cite: 91]
+                        <option value="">All Authors</option>
+                        <option value="GenZ Owais">GenZ Owais</option> [cite: 91]
+                    </select>
+                </div>
+            </div>
+
+            <div id="allFeed" class="posts-grid" aria-live="polite">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading posts...</p> [cite: 92, 93]
+                </div>
             </div>
             
-            <div class="filter-options">
-                <select id="categoryFilter" class="filter-select">
-                    <option value="">All Categories</option>
-                    <option value="thoughts">Thoughts</option>
-                    <option value="tech">Tech</option>
-                    <option value="motivation">Motivation</option>
-                    <option value="ideas">Ideas</option>
-                    <option value="life">Life</option>
-                    <option value="trending">Trending</option>
-                </select>
-                
-                <select id="sortFilter" class="filter-select">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="popular">Most Liked</option>
-                    <option value="views">Most Views</option>
-                    <option value="comments">Most Comments</option>
-                </select>
-
-                <select id="timeFilter" class="filter-select">
-                    <option value="all">All Time</option>
-                    <option value="today">Today</option>
-                    <option value="week">This Week</option>
-                    <option value="month">This Month</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Advanced Filters -->
-        <div class="advanced-filters" id="advancedFilters">
-            <div class="filter-tags" id="filterTags">
-                <!-- Active filters will appear here -->
-            </div>
-            <button id="clearFilters" class="clear-filters-btn">
-                <i class="fas fa-times"></i> Clear All Filters
-            </button>
-        </div>
-
-        <!-- Blog Posts Grid -->
-        <div id="allFeed" class="posts-grid">
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-                <p>Loading posts...</p>
-            </div>
-        </div>
-        
-        <!-- Load More Button -->
-        <div class="section-footer">
-            <button id="loadMoreBtn" class="btn-ghost" style="display:none">
-                <i class="fas fa-plus"></i> Load More Posts
-            </button>
-            <div id="endOfPosts" class="end-message" style="display:none">
-                <i class="fas fa-check-circle"></i>
-                <p>You've reached the end of all posts!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trending Posts -->
-    <section class="section" id="trendingSection" style="display:none">
-        <div class="section-header">
-            <h2><i class="fas fa-fire"></i> Trending Now</h2>
-            <p>Most popular posts in the last 7 days</p>
-        </div>
-        <div id="trendingFeed" class="posts-grid compact">
-            <!-- Trending posts will appear here -->
-        </div>
-    </section>
-
-    <!-- Categories Overview -->
-    <section class="section">
-        <div class="section-header">
-            <h2><i class="fas fa-tags"></i> Categories</h2>
-            <p>Explore posts by category</p>
-        </div>
-        <div class="categories-grid">
-            <div class="category-card" data-category="thoughts">
-                <div class="category-icon">
-                    <i class="fas fa-brain"></i>
+            <div class="section-footer">
+                <button id="loadMoreBtn" class="btn-primary" style="display:none">
+                    <i class="fas fa-plus" aria-hidden="true"></i> Load More Posts [cite: 93]
+                </button>
+                <div id="endOfPosts" class="end-message" style="display: none;" role="status">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i> [cite: 94]
+                    <p>You've reached the end of all posts!</p> [cite: 94]
                 </div>
-                <h3>Thoughts</h3>
-                <p>Personal reflections and ideas</p>
-                <div class="category-count" id="countThoughts">0 posts</div>
             </div>
-            <div class="category-card" data-category="tech">
-                <div class="category-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3>Tech</h3>
-                <p>Technology insights and updates</p>
-                <div class="category-count" id="countTech">0 posts</div>
+        </section>
+
+        <section class="section" id="trendingSection" style="display: none;" aria-labelledby="trending-title"> [cite: 94]
+            <div class="section-header">
+                <h2 id="trending-title"><i class="fas fa-fire" aria-hidden="true"></i> Trending This Week</h2> [cite: 95]
+                <p>Most popular posts in the last 7 days</p> [cite: 95]
             </div>
-            <div class="category-card" data-category="motivation">
-                <div class="category-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3>Motivation</h3>
-                <p>Inspiration and productivity tips</p>
-                <div class="category-count" id="countMotivation">0 posts</div>
-            </div>
-            <div class="category-card" data-category="ideas">
-                <div class="category-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3>Ideas</h3>
-                <p>Creative concepts and innovations</p>
-                <div class="category-count" id="countIdeas">0 posts</div>
-            </div>
-            <div class="category-card" data-category="life">
-                <div class="category-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3>Life</h3>
-                <p>Life experiences and lessons</p>
-                <div class="category-count" id="countLife">0 posts</div>
-            </div>
-        </div>
-    </section>
+            <div id="trendingFeed" class="posts-grid compact-grid"></div>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div> [cite: 96]
                 <span>GenZ Smart</span>
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
-                <a href="comments.html">Comments</a>
-                <a href="about.html">About</a>
+                <a href="comments.html">Comments</a> [cite: 96]
+                <a href="about.html">About</a> [cite: 97]
                 <a href="analytics.html">Analytics</a>
-                <a href="settings.html">Settings</a>
+                <a href="settings.html">Settings</a> [cite: 97]
             </div>
             <div class="footer-social">
-                <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-link">
-                    <i class="fab fa-youtube"></i>
+                <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" target="_blank" class="social-link" aria-label="GenZ Smart on YouTube">
+                    <i class="fab fa-youtube" aria-hidden="true"></i> [cite: 97, 98]
                 </a>
-                <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-link">
-                    <i class="fab fa-instagram"></i>
+                <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" target="_blank" class="social-link" aria-label="GenZ Smart on Instagram">
+                    <i class="fab fa-instagram" aria-hidden="true"></i> [cite: 98]
                 </a>
-                <a href="mailto:youremail@gmail.com" class="social-link">
-                    <i class="fas fa-envelope"></i>
+                <a href="mailto:youremail@gmail.com" class="social-link" aria-label="Email GenZ Smart">
+                    <i class="fas fa-envelope" aria-hidden="true"></i> [cite: 99]
                 </a>
             </div>
             <div class="footer-copyright">
-                © 2025 GenZ Smart Blog — All rights reserved • <span id="currentYear">2025</span>
+                © <span id="currentYear">2025</span> GenZ Smart Blog — All rights reserved [cite: 99]
             </div>
         </div>
     </footer>
 </div>
 
-<!-- Drawer (menu) -->
-<div id="drawerBackdrop" style="display:none"></div>
-<nav id="drawer">
-    <button id="closeDrawer" style="background:transparent;border:0;color:var(--text);font-size:18px">✕</button>
-    <div style="margin-top:15px">
-        <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+<div id="drawerBackdrop" class="drawer-backdrop" style="display:none"></div>
+<nav id="drawer" class="drawer" style="left: -100%;">
+    <button id="closeDrawer" class="drawer-close" aria-label="Close menu">✕</button>
+    <div class="drawer-content">
+        <div class="drawer-title">GenZ Smart</div> [cite: 101]
         
-        <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
+        <div class="clock-container" style="margin:15px 0;" id="drawerClock"> [cite: 101, 102]
             <div class="clock-time" id="drawerClockTime">00:00:00</div>
             <div class="clock-date" id="drawerClockDate">Loading...</div>
         </div>
         
-        <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
-        <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
-        <div style="margin-top:6px"><a href="comments.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-comments"></i> Comments</a></div>
-        <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
-        <div style="margin-top:6px"><a href="analytics.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-chart-line"></i> Analytics</a></div>
-        <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
-        <div style="height:1px;background:var(--divider);margin:12px 0"></div>
-        <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
-        <button id="drawerLogout" style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <a href="index.html" class="drawer-link"><i class="fas fa-home" aria-hidden="true"></i> Home</a> [cite: 103]
+        <a href="blog.html" class="drawer-link"><i class="fas fa-book" aria-hidden="true"></i> Blog</a> [cite: 103, 104]
+        <a href="comments.html" class="drawer-link"><i class="fas fa-comments" aria-hidden="true"></i> Comments</a> [cite: 104, 105]
+        <a href="about.html" class="drawer-link"><i class="fas fa-user" aria-hidden="true"></i> About</a> [cite: 105, 106]
+        <a href="analytics.html" class="drawer-link"><i class="fas fa-chart-line" aria-hidden="true"></i> Analytics</a> [cite: 106, 107]
+        <a href="admin.html" id="adminDrawerLink" class="drawer-link" style="display:none"><i class="fas fa-cog" aria-hidden="true"></i> Admin</a> [cite: 107, 108]
+        
+        <div class="drawer-divider"></div>
+        
+        <button id="openLoginDrawer" class="btn-primary" style="width: 100%;"><i class="fas fa-lock" aria-hidden="true"></i> Admin Login</button> [cite: 109]
+        <button id="drawerLogout" class="btn-ghost" style="width: 100%; margin-top: 8px; display:none"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</button> [cite: 109, 110]
     </div>
 </nav>
 
-<!-- Login Modal -->
-<div id="loginModal" class="login-modal">
+<div id="loginModal" class="login-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="login-title-blog">
     <div class="login-card">
         <div class="login-header">
-            <h3 class="login-title">Admin Login</h3>
+            <h3 id="login-title-blog" class="login-title">Admin Login</h3>
             <p class="login-subtitle">Sign in to access admin features</p>
         </div>
         
         <form id="loginForm">
             <div class="input-group">
-                <label for="loginEmail"><i class="fas fa-envelope"></i> Admin Email</label>
-                <input type="email" id="loginEmail" class="login-input" placeholder="Enter your admin email" required>
+                <label for="loginEmail-blog"><i class="fas fa-envelope" aria-hidden="true"></i> Admin Email</label> [cite: 111]
+                <input type="email" id="loginEmail-blog" class="login-input" placeholder="Enter your admin email" required>
             </div>
             
-            <div class="input-group">
-                <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password" required>
-                <button type="button" id="togglePassword" class="password-toggle">
-                    <i class="fas fa-eye"></i>
+            <div class="input-group" style="position: relative;">
+                <label for="loginPassword-blog"><i class="fas fa-lock" aria-hidden="true"></i> Password</label> [cite: 111, 112]
+                <input type="password" id="loginPassword-blog" class="login-input" placeholder="Enter your password" required>
+                <button type="button" id="togglePassword-blog" class="password-toggle" aria-label="Show password">
+                    <i class="fas fa-eye" aria-hidden="true"></i> [cite: 112]
                 </button>
             </div>
             
             <div class="login-options">
                 <label class="checkbox-label">
-                    <input type="checkbox" id="rememberMe">
+                    <input type="checkbox" id="rememberMe-blog"> [cite: 113]
                     <span class="checkmark"></span>
-                    Remember me
+                    Remember me [cite: 114]
                 </label>
-                <a href="#" id="forgotPassword" class="text-link">Forgot password?</a>
+                <a href="#" id="forgotPassword-blog" class="text-link">Forgot password?</a> [cite: 114]
             </div>
             
             <div class="login-actions">
-                <button type="button" id="loginCancel" class="btn-ghost">Cancel</button>
-                <button type="submit" id="loginSubmit" class="btn-primary">Sign In</button>
+                <button type="button" id="loginCancel-blog" class="btn-ghost">Cancel</button> [cite: 114, 115]
+                <button type="submit" id="loginSubmit-blog" class="btn-primary">Sign In</button> [cite: 115]
             </div>
         </form>
         
         <div class="security-notice">
-            <i class="fas fa-shield-alt"></i>
-            <span>Secure admin authentication</span>
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            <span>Secure admin authentication</span> [cite: 115]
         </div>
     </div>
 </div>
 
-<!-- Toast area -->
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
-<!-- Scripts -->
+<div id="offlineIndicator" class="offline-indicator" style="display: none;" role="status">
+    <i class="fas fa-wifi" aria-hidden="true"></i> [cite: 116]
+    <span>You are currently offline</span> [cite: 116]
+</div>
+
 <script type="module" src="js/app.js"></script>
-<script src="js/blog.js"></script>
 </body>
 </html>
