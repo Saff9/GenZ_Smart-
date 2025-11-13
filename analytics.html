@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.gstatic.com https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com;
+        frame-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    <meta name="referrer-policy" content="no-referrer-when-downgrade">
+    <meta name="X-Content-Type-Options" content="nosniff">
+    
+    <meta name="robots" content="noindex, nofollow">
+
     <title>Analytics — GenZ Smart Performance Dashboard</title>
     
-    <!-- Favicon & PWA -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1d9bf0">
-    
-    <!-- Fonts & Icons -->
+  
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/analytics.css">
-</head>
+    <link rel="stylesheet" href="styles/analytics.css"> </head>
 <body class="dark" data-page="analytics">
 
-<!-- Animated Background -->
 <div class="bg-animation">
     <div class="bg-circle circle-1"></div>
     <div class="bg-circle circle-2"></div>
@@ -33,315 +45,217 @@
 
 <div class="container">
 
-    <!-- HEADER -->
     <header>
         <div class="brand">
             <div class="logo">
-                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;"> [cite: 280]
             </div>
             <div class="brand-text">
                 <div class="site-title">GenZ Smart</div>
-                <div class="site-subtitle">Analytics Dashboard</div>
+                <div class="site-subtitle">Analytics Dashboard</div> [cite: 281]
             </div>
         </div>
 
         <div class="header-actions">
-            <div class="online-status" id="onlineStatus" title="Online">
+            <div class="online-status" id="onlineStatus" title="Online"> [cite: 282]
                 <div class="status-dot"></div>
                 <span>Online</span>
             </div>
 
             <div class="clock-container">
                 <div class="clock-time" id="clockTime">00:00:00</div>
-                <div class="clock-date" id="clockDate">Loading...</div>
+                <div class="clock-date" id="clockDate">Loading...</div> [cite: 282]
             </div>
             
-            <button id="themeToggle" class="icon-btn" title="Toggle theme">
-                <i class="fas fa-sun"></i>
+            <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"> [cite: 283]
+                <i class="fas fa-sun" aria-hidden="true"></i>
             </button>
-            <button id="menuBtn" class="icon-btn" title="Menu">
-                <i class="fas fa-bars"></i>
+            <button id="menuBtn" class="icon-btn" title="Menu" aria-label="Open menu"> [cite: 283]
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
 
-    <!-- NAVIGATION -->
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Main navigation">
         <a href="index.html" class="nav-link">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home" aria-hidden="true"></i> Home
         </a>
         <a href="blog.html" class="nav-link">
-            <i class="fas fa-book"></i> Blog
-        </a>
+            <i class="fas fa-book" aria-hidden="true"></i> Blog
+        </a> [cite: 284]
         <a href="comments.html" class="nav-link">
-            <i class="fas fa-comments"></i> Comments
+            <i class="fas fa-comments" aria-hidden="true"></i> Comments [cite: 285]
         </a>
         <a href="about.html" class="nav-link">
-            <i class="fas fa-user"></i> About
+            <i class="fas fa-user" aria-hidden="true"></i> About [cite: 285]
         </a>
-        <a href="analytics.html" class="nav-link active">
-            <i class="fas fa-chart-line"></i> Analytics
+        <a href="analytics.html" class="nav-link active" aria-current="page">
+            <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics [cite: 285]
         </a>
         <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none">
-            <i class="fas fa-cog"></i> Admin
+            <i class="fas fa-cog" aria-hidden="true"></i> Admin [cite: 286]
         </a>
     </nav>
 
-    <!-- ANALYTICS DASHBOARD -->
-    <section class="section">
-        <div class="section-header">
-            <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
-            <p>Track your website performance and audience insights</p>
-        </div>
+    <main>
+        <section class="section" aria-labelledby="analytics-title">
+            <div class="section-header">
+                <h1 id="analytics-title"><i class="fas fa-chart-line" aria-hidden="true"></i> Analytics Dashboard</h1>
+                <p>Track your website performance and audience insights</p> [cite: 286]
+            </div>
 
-        <!-- Date Range Selector -->
-        <div class="analytics-controls">
-            <div class="date-range">
-                <button class="date-btn active" data-range="7d">7 Days</button>
-                <button class="date-btn" data-range="30d">30 Days</button>
-                <button class="date-btn" data-range="90d">90 Days</button>
-                <button class="date-btn" data-range="1y">1 Year</button>
-                <input type="date" id="customStart" class="date-input">
-                <span>to</span>
-                <input type="date" id="customEnd" class="date-input">
-                <button id="applyDateRange" class="btn-ghost">Apply</button>
+            <div class="analytics-controls" role="region" aria-label="Analytics controls">
+                <div class="date-range">
+                    <button class="date-btn active" data-range="7d" aria-pressed="true">7 Days</button>
+                    <button class="date-btn" data-range="30d" aria-pressed="false">30 Days</button> [cite: 287]
+                    <button class="date-btn" data-range="90d" aria-pressed="false">90 Days</button>
+                    <button class="date-btn" data-range="1y" aria-pressed="false">1 Year</button> [cite: 288]
+                </div>
+                
+                <div class="export-options">
+                    <button id="exportAnalytics" class="btn-ghost">
+                        <i class="fas fa-download" aria-hidden="true"></i> Export Data [cite: 289]
+                    </button>
+                </div>
             </div>
-            
-            <div class="export-options">
-                <button id="exportAnalytics" class="btn-ghost">
-                    <i class="fas fa-download"></i> Export Data
-                </button>
-            </div>
-        </div>
 
-        <!-- Overview Stats -->
-        <div class="analytics-stats-grid">
-            <div class="analytics-stat-card">
-                <div class="stat-main">
-                    <div class="stat-value" id="totalVisitors">0</div>
-                    <div class="stat-label">Total Visitors</div>
-                </div>
-                <div class="stat-trend up">
-                    <i class="fas fa-arrow-up"></i>
-                    <span id="visitorsTrend">0%</span>
-                </div>
-            </div>
-            
-            <div class="analytics-stat-card">
-                <div class="stat-main">
-                    <div class="stat-value" id="pageViews">0</div>
-                    <div class="stat-label">Page Views</div>
-                </div>
-                <div class="stat-trend up">
-                    <i class="fas fa-arrow-up"></i>
-                    <span id="viewsTrend">0%</span>
-                </div>
-            </div>
-            
-            <div class="analytics-stat-card">
-                <div class="stat-main">
-                    <div class="stat-value" id="avgTime">0m</div>
-                    <div class="stat-label">Avg. Time</div>
-                </div>
-                <div class="stat-trend up">
-                    <i class="fas fa-arrow-up"></i>
-                    <span id="timeTrend">0%</span>
-                </div>
-            </div>
-            
-            <div class="analytics-stat-card">
-                <div class="stat-main">
-                    <div class="stat-value" id="bounceRate">0%</div>
-                    <div class="stat-label">Bounce Rate</div>
-                </div>
-                <div class="stat-trend down">
-                    <i class="fas fa-arrow-down"></i>
-                    <span id="bounceTrend">0%</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts Grid -->
-        <div class="charts-grid">
-            <!-- Visitors Chart -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-users"></i> Visitors Overview</h3>
-                    <div class="chart-legend">
-                        <span class="legend-item">
-                            <div class="legend-color new"></div>
-                            New Visitors
-                        </span>
-                        <span class="legend-item">
-                            <div class="legend-color returning"></div>
-                            Returning
-                        </span>
+            <div class="analytics-stats-grid" role="region" aria-label="Statistics overview"> [cite: 290]
+                <div class="analytics-stat-card">
+                    <div class="stat-main">
+                        <div class="stat-value" id="totalVisitors">0</div>
+                        <div class="stat-label">Total Visitors</div> [cite: 290]
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="visitorsChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Page Views Chart -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-eye"></i> Page Views</h3>
-                    <div class="chart-actions">
-                        <button class="chart-btn active" data-metric="views">Views</button>
-                        <button class="chart-btn" data-metric="unique">Unique</button>
+                <div class="analytics-stat-card">
+                    <div class="stat-main">
+                        <div class="stat-value" id="pageViews">0</div>
+                        <div class="stat-label">Page Views</div> [cite: 292]
                     </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="pageViewsChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Traffic Sources -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-traffic-light"></i> Traffic Sources</h3>
-                </div>
-                <div class="chart-container">
-                    <canvas id="sourcesChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Popular Posts -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-fire"></i> Popular Posts</h3>
-                </div>
-                <div class="popular-posts-list" id="popularPosts">
-                    <!-- Popular posts will be loaded here -->
-                </div>
-            </div>
-
-            <!-- Geographic Data -->
-            <div class="chart-card full-width">
-                <div class="chart-header">
-                    <h3><i class="fas fa-globe-americas"></i> Geographic Distribution</h3>
-                </div>
-                <div class="geo-grid">
-                    <div class="geo-chart">
-                        <canvas id="geoChart"></canvas>
+                <div class="analytics-stat-card">
+                    <div class="stat-main">
+                        <div class="stat-value" id="avgTime">0m</div>
+                        <div class="stat-label">Avg. Time</div> [cite: 294]
                     </div>
-                    <div class="country-list">
-                        <h4>Top Countries</h4>
-                        <div id="countryList">
-                            <!-- Country list will be loaded here -->
+                </div>
+                <div class="analytics-stat-card">
+                    <div class="stat-main">
+                        <div class="stat-value" id="bounceRate">0%</div>
+                        <div class="stat-label">Bounce Rate</div> [cite: 296]
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-users" aria-hidden="true"></i> Visitors Overview</h3> [cite: 298]
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="visitorsChart" role="img" aria-label="Visitors overview chart"></canvas> [cite: 302]
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-eye" aria-hidden="true"></i> Page Views</h3> [cite: 302]
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="pageViewsChart" role="img" aria-label="Page views chart"></canvas> [cite: 304]
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-traffic-light" aria-hidden="true"></i> Traffic Sources</h3> [cite: 305]
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sourcesChart" role="img" aria-label="Traffic sources chart"></canvas> [cite: 306]
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-fire" aria-hidden="true"></i> Popular Posts</h3> [cite: 306]
+                    </div>
+                    <div class="popular-posts-list" id="popularPosts" aria-live="polite">
+                        </div>
+                </div>
+
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-globe-americas" aria-hidden="true"></i> Geographic Distribution</h3> [cite: 308]
+                    </div>
+                    <div class="geo-grid">
+                        <div class="geo-chart">
+                            <canvas id="geoChart" role="img" aria-label="Geographic distribution chart"></canvas> [cite: 309]
+                        </div>
+                        <div class="country-list">
+                            <h4>Top Countries</h4> [cite: 310]
+                            <div id="countryList" aria-live="polite">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-mobile-alt" aria-hidden="true"></i> Device Usage</h3> [cite: 311]
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="devicesChart" role="img" aria-label="Device usage chart"></canvas> [cite: 312]
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-heart" aria-hidden="true"></i> Engagement</h3> [cite: 313]
+                    </div>
+                    <div class="engagement-stats">
+                        <div class="engagement-item">
+                            <div class="engagement-value" id="avgLikes">0</div>
+                            <div class="engagement-label">Avg. Likes/Post</div> [cite: 314]
+                        </div>
+                        <div class="engagement-item">
+                            <div class="engagement-value" id="avgComments">0</div>
+                            <div class="engagement-label">Avg. Comments/Post</div> [cite: 315]
+                        </div>
+                        <div class="engagement-item">
+                            <div class="engagement-value" id="avgShares">0</div>
+                            <div class="engagement-label">Avg. Shares/Post</div> [cite: 316]
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Device Breakdown -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-mobile-alt"></i> Device Usage</h3>
+            <div class="analytics-section" role="region" aria-labelledby="realtime-title">
+                <div class="section-header">
+                    <h2 id="realtime-title"><i class="fas fa-clock" aria-hidden="true"></i> Real-time Activity</h2> [cite: 318]
+                    <p>Live visitor activity on your site</p>
                 </div>
-                <div class="chart-container">
-                    <canvas id="devicesChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Engagement Metrics -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3><i class="fas fa-heart"></i> Engagement</h3>
-                </div>
-                <div class="engagement-stats">
-                    <div class="engagement-item">
-                        <div class="engagement-value" id="avgLikes">0</div>
-                        <div class="engagement-label">Avg. Likes/Post</div>
+                <div class="realtime-widget">
+                    <div class="realtime-stats">
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="activeNow">0</div> [cite: 320]
+                            <div class="realtime-label">Active Now</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="todayVisitors">0</div> [cite: 321]
+                            <div class="realtime-label">Today</div>
+                        </div>
                     </div>
-                    <div class="engagement-item">
-                        <div class="engagement-value" id="avgComments">0</div>
-                        <div class="engagement-label">Avg. Comments/Post</div>
-                    </div>
-                    <div class="engagement-item">
-                        <div class="engagement-value" id="avgShares">0</div>
-                        <div class="engagement-label">Avg. Shares/Post</div>
-                    </div>
-                    <div class="engagement-item">
-                        <div class="engagement-value" id="completionRate">0%</div>
-                        <div class="engagement-label">Read Completion</div>
-                    </div>
+                    <div class="activity-feed" id="realtimeActivity" aria-live="polite">
+                        </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Real-time Activity -->
-        <div class="analytics-section">
-            <div class="section-header">
-                <h2><i class="fas fa-clock"></i> Real-time Activity</h2>
-                <p>Live visitor activity on your site</p>
-            </div>
-            <div class="realtime-widget">
-                <div class="realtime-stats">
-                    <div class="realtime-stat">
-                        <div class="realtime-value" id="activeNow">0</div>
-                        <div class="realtime-label">Active Now</div>
-                    </div>
-                    <div class="realtime-stat">
-                        <div class="realtime-value" id="todayVisitors">0</div>
-                        <div class="realtime-label">Today</div>
-                    </div>
-                    <div class="realtime-stat">
-                        <div class="realtime-value" id="yesterdayVisitors">0</div>
-                        <div class="realtime-label">Yesterday</div>
-                    </div>
-                </div>
-                <div class="activity-feed" id="realtimeActivity">
-                    <!-- Real-time activities will appear here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- SEO Performance -->
-        <div class="analytics-section">
-            <div class="section-header">
-                <h2><i class="fas fa-search"></i> SEO Performance</h2>
-                <p>Search engine optimization metrics</p>
-            </div>
-            <div class="seo-metrics">
-                <div class="seo-metric">
-                    <div class="metric-value">95%</div>
-                    <div class="metric-label">SEO Score</div>
-                    <div class="metric-progress">
-                        <div class="progress-bar" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="seo-metric">
-                    <div class="metric-value">1.2s</div>
-                    <div class="metric-label">Load Time</div>
-                    <div class="metric-progress">
-                        <div class="progress-bar" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="seo-metric">
-                    <div class="metric-value">100%</div>
-                    <div class="metric-label">Mobile Friendly</div>
-                    <div class="metric-progress">
-                        <div class="progress-bar" style="width: 100%"></div>
-                    </div>
-                </div>
-                <div class="seo-metric">
-                    <div class="metric-value">85%</div>
-                    <div class="metric-label">Core Web Vitals</div>
-                    <div class="metric-progress">
-                        <div class="progress-bar" style="width: 85%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
-                <span>GenZ Smart</span>
+                <span>GenZ Smart</span> [cite: 330]
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
@@ -349,45 +263,42 @@
                 <a href="comments.html">Comments</a>
                 <a href="about.html">About</a>
                 <a href="analytics.html">Analytics</a>
-                <a href="settings.html">Settings</a>
+                <a href="settings.html">Settings</a> [cite: 331]
             </div>
             <div class="footer-copyright">
-                © 2025 GenZ Smart Blog — All rights reserved • <span id="currentYear">2025</span>
+                © <span id="currentYear">2025</span> GenZ Smart Blog — All rights reserved [cite: 332]
             </div>
         </div>
     </footer>
 </div>
 
-<!-- Drawer (menu) -->
-<div id="drawerBackdrop" style="display:none"></div>
-<nav id="drawer">
-    <button id="closeDrawer" style="background:transparent;border:0;color:var(--text);font-size:18px">✕</button>
-    <div style="margin-top:15px">
-        <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+<div id="drawerBackdrop" class="drawer-backdrop" style="display:none"></div>
+<nav id="drawer" class="drawer" style="left: -100%;">
+    <button id="closeDrawer" class="drawer-close" aria-label="Close menu">✕</button>
+    <div class="drawer-content">
+        <div class="drawer-title">GenZ Smart</div> [cite: 333]
         
-        <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
+        <div class="clock-container" style="margin:15px 0;" id="drawerClock"> [cite: 334]
             <div class="clock-time" id="drawerClockTime">00:00:00</div>
             <div class="clock-date" id="drawerClockDate">Loading...</div>
         </div>
         
-        <div style="margin-top:12px"><a href="index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-home"></i> Home</a></div>
-        <div style="margin-top:6px"><a href="blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-book"></i> Blog</a></div>
-        <div style="margin-top:6px"><a href="comments.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-comments"></i> Comments</a></div>
-        <div style="margin-top:6px"><a href="about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-user"></i> About</a></div>
-        <div style="margin-top:6px"><a href="analytics.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-chart-line"></i> Analytics</a></div>
-        <div id="adminDrawerLink" style="margin-top:6px;display:none"><a href="admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;"><i class="fas fa-cog"></i> Admin</a></div>
-        <div style="height:1px;background:var(--divider);margin:12px 0"></div>
-        <button id="openLogin" style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px"><i class="fas fa-lock"></i> Admin Login</button>
-        <button id="drawerLogout" style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <a href="index.html" class="drawer-link"><i class="fas fa-home" aria-hidden="true"></i> Home</a> [cite: 336]
+        <a href="blog.html" class="drawer-link"><i class="fas fa-book" aria-hidden="true"></i> Blog</a> [cite: 337]
+        <a href="comments.html" class="drawer-link"><i class="fas fa-comments" aria-hidden="true"></i> Comments</a> [cite: 337]
+        <a href="about.html" class="drawer-link"><i class="fas fa-user" aria-hidden="true"></i> About</a> [cite: 339]
+        <a href="analytics.html" class="drawer-link"><i class="fas fa-chart-line" aria-hidden="true"></i> Analytics</a> [cite: 339]
+        <a href="admin.html" id="adminDrawerLink" class="drawer-link" style="display:none"><i class="fas fa-cog" aria-hidden="true"></i> Admin</a> [cite: 340]
+        
+        <div class="drawer-divider"></div>
+        
+        <button id="openLoginDrawer" class="btn-primary" style="width: 100%;"><i class="fas fa-lock" aria-hidden="true"></i> Admin Login</button> [cite: 341]
+        <button id="drawerLogout" class="btn-ghost" style="width: 100%; margin-top: 8px; display:none"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</button> [cite: 343]
     </div>
 </nav>
 
-<!-- Toast area -->
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
-<!-- Scripts -->
 <script type="module" src="js/app.js"></script>
-<script src="js/analytics.js"></script>
-<script src="js/notifications.js"></script>
 </body>
 </html>
