@@ -1,427 +1,761 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenZ Smart Community Ideas</title>
-  <!-- Favicon and PWA -->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#1d9bf0" />
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="GenZ Smart Community - Share ideas, motivation, and connect with like-minded individuals. 50K readers community." />
-  <meta name="keywords" content="genz, community, ideas, motivation, blog, articles, young entrepreneurs" />
-  <meta name="author" content="Owais Ahmad" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="GenZ Smart Community Ideas" />
-  <meta property="og:description" content="Join our vibrant community of 50K readers for ideas, motivation and connections" />
-  <meta property="og:image" content="assets/og-image.jpg" />
-  <meta property="og:url" content="https://genzsmart.com" />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GenZ Smart Community Ideas" />
-  <meta name="twitter:description" content="Join 50K readers in our vibrant community" />
-  <meta name="twitter:image" content="assets/twitter-image.jpg" />
-
-  <!-- Fonts and Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css" />
-
-  <!-- Preload important resources -->
-  <link rel="preload" href="js/app.js" as="script" />
-  <link rel="preload" href="styles/main.css" as="style" />
-</head>
-<body class="dark" data-page="home">
-  <!-- Animated Background -->
-  <div class="bg-animation">
-    <div class="bg-circle circle-1"></div>
-    <div class="bg-circle circle-2"></div>
-    <div class="bg-circle circle-3"></div>
-  </div>
-
-  <!-- Loading Screen -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-content">
-      <div class="logo-spinner">
-        <div class="logoGZ"></div>
-      </div>
-      <p>Loading GenZ Smart...</p>
-    </div>
-  </div>
-
-  <div class="container">
-    <!-- HEADER -->
-    <header>
-      <div class="brand">
-        <div class="logo">
-          <img src="assets/logo.png" alt="GenZ Smart Logo" style="width: 100px; border-radius: 12px;" />
-        </div>
-        <div class="brand-text">
-          <div class="site-title">GenZ Smart</div>
-          <div class="site-subtitle">Community Ideas Motivation</div>
-        </div>
-      </div>
-
-      <div class="header-actions">
-        <!-- Online Status -->
-        <div class="online-status" id="onlineStatus" title="Online">
-          <div class="status-dot"></div>
-          <span>Online</span>
-        </div>
-
-        <!-- Clock and Date -->
-        <div class="clock-container">
-          <div id="clockTime" class="clock-time">00:00:00</div>
-          <div id="clockDate" class="clock-date">Loading...</div>
-        </div>
-
-        <!-- Notification Bell -->
-        <div class="notification-container">
-          <button id="notificationBell" class="icon-btn" title="Notifications">
-            <i class="fas fa-bell"></i>
-            <span id="notificationBadge" class="notification-badge" style="display:none;">0</span>
-          </button>
-          <div id="notificationDropdown" class="notification-dropdown">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button id="markAllRead" class="text-btn">Mark all read</button>
-            </div>
-            <div id="notificationList" class="notification-list">
-              <!-- Notifications will be loaded here -->
-            </div>
-            <div class="notification-footer">
-              <a href="notifications.html">View all</a>
-            </div>
-          </div>
-        </div>
-
-        <button id="themeToggle" class="icon-btn" title="Toggle theme">
-          <i class="fas fa-sun"></i>
-        </button>
-
-        <button id="menuBtn" class="icon-btn" title="Menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </header>
-
-    <!-- NAVIGATION -->
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-      <a href="blog.html" class="nav-link"><i class="fas fa-book"></i> Blog<span id="badgeCount" class="badge">0</span></a>
-      <a href="comments.html" class="nav-link"><i class="fas fa-comments"></i> Comments</a>
-      <a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a>
-      <a href="analytics.html" class="nav-link"><i class="fas fa-chart-line"></i> Analytics</a>
-      <a href="admin.html" class="nav-link" id="adminNavLink" style="display:none;"><i class="fas fa-cog"></i> Admin</a>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero reveal" aria-label="Welcome banner">
-      <div class="hero-card">
-        <div class="hero-title" id="heroWelcome">Welcome to GenZ Smart</div>
-        <div id="heroQuote" class="hero-quote">Small ideas, big ripples.</div>
-
-        <div class="hero-stats" aria-live="polite" aria-atomic="true">
-          <div class="stat">
-            <div class="stat-value" id="postCount">10</div>
-            <div class="stat-label">Total Posts</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value" id="userCount">69</div>
-            <div class="stat-label">Active Users</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">50K</div>
-            <div class="stat-label">Readers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value" id="commentCount">0</div>
-            <div class="stat-label">Comments</div>
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <button id="subscribeBtn" class="btn-primary"><i class="fas fa-bell"></i> Subscribe to Updates</button>
-          <button id="shareSiteBtn" class="btn-ghost"><i class="fas fa-share"></i> Share Community</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pinned Post -->
-    <div class="pinned-post" id="pinnedPostContainer" aria-live="polite" aria-atomic="true">
-      <div class="pinned-badge">Featured</div>
-      <div class="post-card" id="pinnedPost">
-        <!-- Pinned post will be loaded here -->
-      </div>
-    </div>
-
-    <!-- Recent Posts Section -->
-    <section class="section" aria-label="Recent posts">
-      <div class="section-header">
-        <h2><i class="fas fa-fire"></i> Recent Posts</h2>
-        <p>Latest updates from our community of 50K readers</p>
-      </div>
-
-      <div class="blog-controls" role="search">
-        <div class="search-container">
-          <i class="fas fa-search search-icon"></i>
-          <input
-            type="text"
-            id="searchInput"
-            class="search-bar"
-            placeholder="Search recent posts..."
-            aria-label="Search recent posts"
-          />
-        </div>
-
-        <div class="filter-options">
-          <select id="categoryFilter" class="filter-select" aria-label="Filter posts by category">
-            <option value="All Categories">All Categories</option>
-            <option value="Thoughts">Thoughts</option>
-            <option value="Tech">Tech</option>
-            <option value="Motivation">Motivation</option>
-            <option value="Ideas">Ideas</option>
-            <option value="Life">Life</option>
-          </select>
-
-          <select id="sortFilter" class="filter-select" aria-label="Sort posts">
-            <option value="newest">Newest First</option>
-            <option value="popular">Most Popular</option>
-            <option value="trending">Trending</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="homeFeed" class="posts-grid" aria-live="polite" aria-atomic="true">
-        <div class="loading-spinner">
-          <div class="spinner"></div>
-          <p>Loading posts...</p>
-        </div>
-        <!-- Posts will be dynamically loaded here -->
-      </div>
-
-      <div class="section-footer">
-        <a href="blog.html" class="btn-primary"><i class="fas fa-book-open"></i> View All Posts</a>
-      </div>
-    </section>
-
-    <!-- Community Stats -->
-    <section class="section" aria-label="Community statistics">
-      <div class="section-header">
-        <h2><i class="fas fa-chart-bar"></i> Community Stats</h2>
-        <p>Real-time insights from our growing community</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card" role="region" aria-label="Total views">
-          <div class="stat-icon"><i class="fas fa-eye"></i></div>
-          <div class="stat-content">
-            <div id="totalViews" class="stat-number" aria-live="polite">0</div>
-            <div class="stat-label">Total Views</div>
-          </div>
-        </div>
-        <div class="stat-card" role="region" aria-label="Total likes">
-          <div class="stat-icon"><i class="fas fa-heart"></i></div>
-          <div class="stat-content">
-            <div id="totalLikes" class="stat-number" aria-live="polite">0</div>
-            <div class="stat-label">Total Likes</div>
-          </div>
-        </div>
-        <div class="stat-card" role="region" aria-label="Total shares">
-          <div class="stat-icon"><i class="fas fa-share"></i></div>
-          <div class="stat-content">
-            <div id="totalShares" class="stat-number" aria-live="polite">0</div>
-            <div class="stat-label">Total Shares</div>
-          </div>
-        </div>
-        <div class="stat-card" role="region" aria-label="Days active">
-          <div class="stat-icon"><i class="fas fa-clock"></i></div>
-          <div class="stat-content">
-            <div class="stat-number">7</div>
-            <div class="stat-label">Days Active</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Links -->
-    <section class="section" aria-label="Quick access links">
-      <div class="section-header">
-        <h2><i class="fas fa-rocket"></i> Quick Access</h2>
-      </div>
-      <div class="quick-links" role="navigation" aria-label="Quick access navigation">
-        <a href="blog.html" class="quick-link">
-          <div class="quick-icon"><i class="fas fa-newspaper"></i></div>
-          <span>All Articles</span>
-        </a>
-        <a href="comments.html" class="quick-link">
-          <div class="quick-icon"><i class="fas fa-comments"></i></div>
-          <span>Comments</span>
-        </a>
-        <a href="about.html" class="quick-link">
-          <div class="quick-icon"><i class="fas fa-user"></i></div>
-          <span>About Me</span>
-        </a>
-        <a href="analytics.html" class="quick-link">
-          <div class="quick-icon"><i class="fas fa-chart-line"></i></div>
-          <span>Analytics</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="section" aria-label="Newsletter signup">
-      <div class="newsletter-card">
-        <div class="newsletter-content">
-          <h3><i class="fas fa-envelope"></i> Stay Updated</h3>
-          <p>Join 50K readers getting the latest ideas and motivation</p>
-          <div class="newsletter-form">
-            <input type="email" id="newsletterEmail" placeholder="Enter your email" class="newsletter-input" aria-label="Email for newsletter" />
-            <button id="newsletterSubmit" class="btn-primary"><i class="fas fa-paper-plane"></i> Subscribe</button>
-          </div>
-          <p class="newsletter-note">No spam, unsubscribe anytime</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-content">
-        <div class="footer-brand">
-          <div class="logo" style="width:30px; height:30px; font-size:12px;">GZ</div>
-          <span>GenZ Smart</span>
-        </div>
-        <div class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="blog.html">Blog</a>
-          <a href="comments.html">Comments</a>
-          <a href="about.html">About</a>
-          <a href="analytics.html">Analytics</a>
-          <a href="settings.html">Settings</a>
-        </div>
-        <div class="footer-social" aria-label="Social media links">
-          <a href="https://youtube.com/calizenowais" target="_blank" class="social-link" aria-label="YouTube">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="https://www.instagram.com/owaisdar511" target="_blank" class="social-link" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="mailto:youremail@gmail.com" class="social-link" aria-label="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        2025 GenZ Smart Blog All rights reserved &copy; <span id="currentYear">2025</span>
-      </div>
-    </footer>
-
-    <!-- Drawer menu for mobile -->
-    <div id="drawerBackdrop" style="display:none;"></div>
-    <nav id="drawer" style="left: -100%;">
-      <button id="closeDrawer" style="background: transparent; border: 0; color: var(--text); font-size: 18px;">&times;</button>
-      <div style="margin-top: 15px; font-weight: 800; font-family: 'Poppins', sans-serif; font-size: 1.1rem;">GenZ Smart</div>
-      <div class="clock-container" style="margin:15px 0; display:none;" id="drawerClock">
-        <div class="clock-time" id="drawerClockTime">00:00:00</div>
-        <div class="clock-date" id="drawerClockDate">Loading...</div>
-      </div>
-      <div style="margin-top: 12px;">
-        <a href="index.html" style="text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-home"></i> Home
-        </a>
-        <a href="blog.html" style="text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-book"></i> Blog
-        </a>
-        <a href="comments.html" style="text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-comments"></i> Comments
-        </a>
-        <a href="about.html" style="text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-user"></i> About
-        </a>
-        <a href="analytics.html" style="text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-chart-line"></i> Analytics
-        </a>
-        <a href="admin.html" id="adminDrawerLink" style="margin-top: 6px; display:none; text-decoration:none; color: var(--text); font-weight: 600; display: block; padding: 8px 0;">
-          <i class="fas fa-cog"></i> Admin
-        </a>
-      </div>
-      <div style="height: 1px; background: var(--divider); margin: 12px 0;"></div>
-      <button id="drawerLogout" style="background: transparent; border: 1px solid var(--divider); color: var(--text); padding: 10px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; font-size: 14px; margin-top: 8px; display:none;">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </button>
-    </nav>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="login-modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle" aria-modal="true" style="display:none;">
-      <div class="login-card" role="document">
-        <div class="login-header">
-          <h3 id="loginTitle" class="login-title">Admin Login</h3>
-          <p class="login-subtitle">Sign in to access admin features</p>
-        </div>
-        <form id="loginForm" aria-describedby="loginInstructions">
-          <div class="input-group">
-            <label for="loginEmail"><i class="fas fa-envelope"></i> Admin Email</label>
-            <input type="email" id="loginEmail" class="login-input" placeholder="Enter your admin email" required aria-required="true" />
-          </div>
-          <div class="input-group">
-            <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
-            <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password" required aria-required="true" />
-            <button type="button" id="togglePassword" class="password-toggle" aria-label="Toggle password visibility">
-              <i class="fas fa-eye"></i>
-            </button>
-          </div>
-          <div class="login-options">
-            <label class="checkbox-label" for="rememberMe">
-              <input type="checkbox" id="rememberMe" />
-              <span class="checkmark"></span> Remember me
-            </label>
-            <a href="#" id="forgotPassword" class="text-link">Forgot password?</a>
-          </div>
-          <div class="login-actions">
-            <button type="button" id="loginCancel" class="btn-ghost">Cancel</button>
-            <button type="submit" id="loginSubmit" class="btn-primary">Sign In</button>
-          </div>
-        </form>
-        <div class="security-notice">
-          <i class="fas fa-shield-alt"></i> Secure admin authentications
-        </div>
-      </div>
-    </div>
-
-    <!-- Toast notifications container -->
-    <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
-
-    <!-- Offline Indicator -->
-    <div id="offlineIndicator" class="offline-indicator" role="alert" style="display:none;">
-      <i class="fas fa-wifi"></i> <span>You are currently offline</span>
-    </div>
-  </div>
-
-  <!-- Quill Editor CDN -->
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-
-  <!-- Main app script -->
-  <script type="module" src="js/app.js"></script>
-  <script src="js/notifications.js"></script>
-
-  <!-- Service Worker registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('js/service-worker.js').then(() => {
-        console.log('Service Worker registered');
-      }).catch((err) => {
-        console.error('Service Worker registration failed', err);
-      });
+    <!-- ============================================ -->
+    <!-- ESSENTIAL META TAGS -->
+    <!-- ============================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- ============================================ -->
+    <!-- SECURITY HEADERS (via meta tags for GitHub Pages) -->
+    <!-- ============================================ -->
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.quilljs.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.quilljs.com;
+        img-src 'self' data: https: blob:;
+        font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        connect-src 'self' https://*.firebaseio.com https://*.googleapis.com;
+        frame-src 'none';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    
+    <!-- Referrer Policy for privacy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Disable MIME type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <!-- ============================================ -->
+    <!-- SEO & OPEN GRAPH META TAGS -->
+    <!-- ============================================ -->
+    <title>GenZ Smart — Community & Ideas | 50K+ Readers</title>
+    <meta name="description" content="Join GenZ Smart community of 50K+ readers. Share ideas, find motivation, and connect with like-minded individuals. Your hub for creativity and growth.">
+    <meta name="keywords" content="genz, community, ideas, motivation, blog, articles, young entrepreneurs, creativity, inspiration, personal growth">
+    <meta name="author" content="Owais Ahmad">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://saff9.github.io/GenZ_Smart-/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saff9.github.io/GenZ_Smart-/">
+    <meta property="og:title" content="GenZ Smart — Community & Ideas">
+    <meta property="og:description" content="Join our vibrant community of 50K+ readers for ideas, motivation and connections">
+    <meta property="og:image" content="https://saff9.github.io/GenZ_Smart-/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="GenZ Smart">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://saff9.github.io/GenZ_Smart-/">
+    <meta name="twitter:title" content="GenZ Smart — Community & Ideas">
+    <meta name="twitter:description" content="Join 50K+ readers in our vibrant community">
+    <meta name="twitter:image" content="https://saff9.github.io/GenZ_Smart-/assets/twitter-image.jpg">
+    <meta name="twitter:creator" content="@GenZSmart">
+    
+    <!-- ============================================ -->
+    <!-- PWA & MOBILE APP META TAGS -->
+    <!-- ============================================ -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1d9bf0" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GenZ Smart">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- ============================================ -->
+    <!-- FAVICONS & APP ICONS -->
+    <!-- ============================================ -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/icon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/icon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512.png">
+    
+    <!-- ============================================ -->
+    <!-- PRECONNECT & DNS PREFETCH -->
+    <!-- ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://firebaseio.com">
+    
+    <!-- ============================================ -->
+    <!-- FONTS & ICONS (with display=swap for performance) -->
+    <!-- ============================================ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- ============================================ -->
+    <!-- STYLESHEETS -->
+    <!-- ============================================ -->
+    <link rel="stylesheet" href="./styles/main.css">
+    
+    <!-- ============================================ -->
+    <!-- PRELOAD CRITICAL RESOURCES -->
+    <!-- ============================================ -->
+    <link rel="preload" href="./js/app.js" as="script">
+    <link rel="preload" href="./styles/main.css" as="style">
+    <link rel="preload" href="./assets/logo.png" as="image">
+    
+    <!-- ============================================ -->
+    <!-- STRUCTURED DATA (Schema.org) -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "GenZ Smart",
+        "description": "Community platform for ideas, motivation, and growth",
+        "url": "https://saff9.github.io/GenZ_Smart-/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://saff9.github.io/GenZ_Smart-/blog.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
     }
-  </script>
+    </script>
+</head>
+
+<body class="dark" data-page="home">
+    <!-- ============================================ -->
+    <!-- ANIMATED BACKGROUND -->
+    <!-- ============================================ -->
+    <div class="bg-animation" aria-hidden="true">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- LOADING SCREEN -->
+    <!-- ============================================ -->
+    <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite">
+        <div class="loading-content">
+            <div class="logo-spinner">
+                <div class="logo" aria-label="GenZ Smart Logo">GZ</div>
+            </div>
+            <p>Loading GenZ Smart...</p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTAINER -->
+    <!-- ============================================ -->
+    <div class="container">
+
+        <!-- ============================================ -->
+        <!-- HEADER (Semantic HTML) -->
+        <!-- ============================================ -->
+        <header role="banner">
+            <div class="brand">
+                <div class="logo">
+                    <img src="./assets/logo.png" alt="GenZ Smart Logo" width="40" height="40" loading="eager">
+                </div>
+                <div class="brand-text">
+                    <div class="site-title">GenZ Smart</div>
+                    <div class="site-subtitle">Community • Ideas • Motivation</div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <!-- Online Status -->
+                <div class="online-status" id="onlineStatus" title="Connection Status" aria-live="polite">
+                    <div class="status-dot" aria-hidden="true"></div>
+                    <span>Online</span>
+                </div>
+                
+                <!-- Clock and Date -->
+                <div class="clock-container" aria-label="Current time">
+                    <time class="clock-time" id="clockTime">00:00:00</time>
+                    <div class="clock-date" id="clockDate">Loading...</div>
+                </div>
+                
+                <!-- Notification Bell -->
+                <div class="notification-container">
+                    <button id="notificationBell" class="icon-btn" 
+                            title="View notifications" 
+                            aria-label="Notifications"
+                            aria-expanded="false">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" id="notificationBadge" 
+                              style="display: none" 
+                              aria-label="Unread notifications">0</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown" role="menu">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button id="markAllRead" class="text-btn">Mark all read</button>
+                        </div>
+                        <div class="notification-list" id="notificationList" role="list">
+                            <!-- Notifications will appear here -->
+                        </div>
+                        <div class="notification-footer">
+                            <a href="./notifications.html">View all</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="themeToggle" class="icon-btn" 
+                        title="Toggle dark/light mode" 
+                        aria-label="Toggle theme">
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                </button>
+                <button id="menuBtn" class="icon-btn" 
+                        title="Open navigation menu" 
+                        aria-label="Menu"
+                        aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- NAVIGATION (Semantic HTML) -->
+        <!-- ============================================ -->
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <a href="./index.html" class="nav-link active" aria-current="page">
+                <i class="fas fa-home" aria-hidden="true"></i> Home
+            </a>
+            <a href="./blog.html" class="nav-link">
+                <i class="fas fa-book" aria-hidden="true"></i> Blog 
+                <span class="badge" id="badgeCount">0</span>
+            </a>
+            <a href="./comments.html" class="nav-link">
+                <i class="fas fa-comments" aria-hidden="true"></i> Comments
+            </a>
+            <a href="./about.html" class="nav-link">
+                <i class="fas fa-user" aria-hidden="true"></i> About
+            </a>
+            <a href="./analytics.html" class="nav-link">
+                <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics
+            </a>
+            <a href="./admin.html" class="nav-link" id="adminNavLink" style="display:none">
+                <i class="fas fa-cog" aria-hidden="true"></i> Admin
+            </a>
+        </nav>
+
+        <!-- ============================================ -->
+        <!-- MAIN CONTENT (Semantic HTML) -->
+        <!-- ============================================ -->
+        <main role="main">
+
+            <!-- ============================================ -->
+            <!-- HERO SECTION -->
+            <!-- ============================================ -->
+            <section class="hero reveal" aria-labelledby="hero-title">
+                <div class="hero-card">
+                    <h1 id="hero-title" class="hero-title">Welcome to GenZ Smart</h1>
+                    <blockquote id="heroQuote" class="hero-quote">"Small ideas, big ripples."</blockquote>
+                    
+                    <div class="hero-stats" role="group" aria-label="Community statistics">
+                        <div class="stat">
+                            <div class="stat-value" id="postCount" aria-label="Total posts">10</div>
+                            <div class="stat-label">Total Posts</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="userCount">69+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">50K+</div>
+                            <div class="stat-label">Readers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="commentCount">0</div>
+                            <div class="stat-label">Comments</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="hero-actions">
+                        <button id="subscribeBtn" class="btn-primary">
+                            <i class="fas fa-bell" aria-hidden="true"></i> Subscribe to Updates
+                        </button>
+                        <button id="shareSiteBtn" class="btn-ghost">
+                            <i class="fas fa-share" aria-hidden="true"></i> Share Community
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- PINNED POST -->
+            <!-- ============================================ -->
+            <aside class="pinned-post" id="pinnedPostContainer" aria-label="Featured post">
+                <div class="pinned-badge" aria-label="Featured">📌 Featured</div>
+                <article class="post-card" id="pinnedPost">
+                    <!-- Pinned post will be loaded here -->
+                </article>
+            </aside>
+
+            <!-- ============================================ -->
+            <!-- RECENT POSTS SECTION -->
+            <!-- ============================================ -->
+            <section class="section" aria-labelledby="recent-posts-heading">
+                <header class="section-header">
+                    <h2 id="recent-posts-heading">
+                        <i class="fas fa-fire" aria-hidden="true"></i> Recent Posts
+                    </h2>
+                    <p>Latest updates from our community of 50K+ readers</p>
+                </header>
+                
+                <!-- Search & Filter Bar -->
+                <div class="blog-controls" role="search">
+                    <div class="search-container">
+                        <label for="searchInput" class="sr-only">Search posts</label>
+                        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                        <input type="search" 
+                               id="searchInput" 
+                               class="search-bar" 
+                               placeholder="Search recent posts..."
+                               aria-label="Search posts">
+                    </div>
+                    
+                    <div class="filter-options">
+                        <label for="categoryFilter" class="sr-only">Filter by category</label>
+                        <select id="categoryFilter" class="filter-select" aria-label="Category filter">
+                            <option value="">All Categories</option>
+                            <option value="thoughts">Thoughts</option>
+                            <option value="tech">Tech</option>
+                            <option value="motivation">Motivation</option>
+                            <option value="ideas">Ideas</option>
+                            <option value="life">Life</option>
+                        </select>
+                        
+                        <label for="sortFilter" class="sr-only">Sort posts</label>
+                        <select id="sortFilter" class="filter-select" aria-label="Sort filter">
+                            <option value="newest">Newest First</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="trending">Trending</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="homeFeed" class="posts-grid" role="feed" aria-busy="true">
+                    <div class="loading-spinner" aria-label="Loading posts">
+                        <div class="spinner"></div>
+                        <p>Loading posts...</p>
+                    </div>
+                </div>
+                
+                <footer class="section-footer">
+                    <a href="./blog.html" class="btn-primary">
+                        <i class="fas fa-book-open" aria-hidden="true"></i> View All Posts
+                    </a>
+                </footer>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- COMMUNITY STATS -->
+            <!-- ============================================ -->
+            <section class="section" aria-labelledby="stats-heading">
+                <header class="section-header">
+                    <h2 id="stats-heading">
+                        <i class="fas fa-chart-bar" aria-hidden="true"></i> Community Stats
+                    </h2>
+                    <p>Real-time insights from our growing community</p>
+                </header>
+                
+                <div class="stats-grid" role="list">
+                    <div class="stat-card" role="listitem">
+                        <div class="stat-icon" aria-hidden="true">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="totalViews">0</div>
+                            <div class="stat-label">Total Views</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" role="listitem">
+                        <div class="stat-icon" aria-hidden="true">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="totalLikes">0</div>
+                            <div class="stat-label">Total Likes</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" role="listitem">
+                        <div class="stat-icon" aria-hidden="true">
+                            <i class="fas fa-share"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="totalShares">0</div>
+                            <div class="stat-label">Total Shares</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" role="listitem">
+                        <div class="stat-icon" aria-hidden="true">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">7+</div>
+                            <div class="stat-label">Days Active</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- QUICK LINKS -->
+            <!-- ============================================ -->
+            <section class="section" aria-labelledby="quick-access-heading">
+                <header class="section-header">
+                    <h2 id="quick-access-heading">
+                        <i class="fas fa-rocket" aria-hidden="true"></i> Quick Access
+                    </h2>
+                </header>
+                <nav class="quick-links" aria-label="Quick access navigation">
+                    <a href="./blog.html" class="quick-link">
+                        <div class="quick-icon" aria-hidden="true">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <span>All Articles</span>
+                    </a>
+                    <a href="./comments.html" class="quick-link">
+                        <div class="quick-icon" aria-hidden="true">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <span>Comments</span>
+                    </a>
+                    <a href="./about.html" class="quick-link">
+                        <div class="quick-icon" aria-hidden="true">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>About Me</span>
+                    </a>
+                    <a href="./analytics.html" class="quick-link">
+                        <div class="quick-icon" aria-hidden="true">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span>Analytics</span>
+                    </a>
+                    <div class="quick-link" id="composeQuickLink" style="display:none" tabindex="0" role="button">
+                        <div class="quick-icon" aria-hidden="true">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <span>New Post</span>
+                    </div>
+                </nav>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- NEWSLETTER SIGNUP -->
+            <!-- ============================================ -->
+            <section class="section" aria-labelledby="newsletter-heading">
+                <div class="newsletter-card">
+                    <div class="newsletter-content">
+                        <h3 id="newsletter-heading">
+                            <i class="fas fa-envelope" aria-hidden="true"></i> Stay Updated
+                        </h3>
+                        <p>Join 50K+ readers getting the latest ideas and motivation</p>
+                        <form class="newsletter-form" id="newsletterForm" novalidate>
+                            <label for="newsletterEmail" class="sr-only">Email address</label>
+                            <input type="email" 
+                                   id="newsletterEmail" 
+                                   placeholder="Enter your email" 
+                                   class="newsletter-input"
+                                   required
+                                   aria-required="true"
+                                   autocomplete="email">
+                            <button type="submit" id="newsletterSubmit" class="btn-primary">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i> Subscribe
+                            </button>
+                        </form>
+                        <p class="newsletter-note">No spam, unsubscribe anytime</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ============================================ -->
+        <!-- FOOTER (Semantic HTML) -->
+        <!-- ============================================ -->
+        <footer role="contentinfo">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo" style="width:30px;height:30px;font-size:12px;" aria-hidden="true">GZ</div>
+                    <span>GenZ Smart</span>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="./index.html">Home</a>
+                    <a href="./blog.html">Blog</a>
+                    <a href="./comments.html">Comments</a>
+                    <a href="./about.html">About</a>
+                    <a href="./analytics.html">Analytics</a>
+                    <a href="./settings.html">Settings</a>
+                </nav>
+                <div class="footer-social" role="list" aria-label="Social media links">
+                    <a href="https://youtube.com/@calizenowais?si=y5c2lp6JfCjSiJXB" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="social-link"
+                       aria-label="Visit our YouTube channel">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/owaisdar_511?igsh=MWV6d21lbjVpNXh6Yg==" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="social-link"
+                       aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="mailto:youremail@gmail.com" 
+                       class="social-link"
+                       aria-label="Send us an email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="footer-copyright">
+                    © <span id="currentYear">2025</span> GenZ Smart Blog — All rights reserved
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DRAWER MENU -->
+    <!-- ============================================ -->
+    <div id="drawerBackdrop" style="display:none" aria-hidden="true"></div>
+    <nav id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <button id="closeDrawer" 
+                aria-label="Close menu"
+                style="background:transparent;border:0;color:var(--text);font-size:18px">
+            ✕
+        </button>
+        <div style="margin-top:15px">
+            <div style="font-weight:800;font-family:Poppins; font-size: 1.1rem;">GenZ Smart</div>
+            
+            <div style="margin-top:12px">
+                <a href="./index.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-home" aria-hidden="true"></i> Home
+                </a>
+            </div>
+            <div style="margin-top:6px">
+                <a href="./blog.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-book" aria-hidden="true"></i> Blog
+                </a>
+            </div>
+            <div style="margin-top:6px">
+                <a href="./comments.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-comments" aria-hidden="true"></i> Comments
+                </a>
+            </div>
+            <div style="margin-top:6px">
+                <a href="./about.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-user" aria-hidden="true"></i> About
+                </a>
+            </div>
+            <div style="margin-top:6px">
+                <a href="./analytics.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics
+                </a>
+            </div>
+            <div id="adminDrawerLink" style="margin-top:6px;display:none">
+                <a href="./admin.html" style="text-decoration:none;color:var(--text);font-weight:600; display: block; padding: 8px 0;">
+                    <i class="fas fa-cog" aria-hidden="true"></i> Admin
+                </a>
+            </div>
+            <div style="height:1px;background:var(--divider);margin:12px 0"></div>
+            <button id="openLogin" 
+                    style="background:var(--accent-gradient);color:#fff;padding:10px 14px;border-radius:6px;border:0;font-weight:600;cursor:pointer; width: 100%;font-size:14px">
+                <i class="fas fa-lock" aria-hidden="true"></i> Admin Login
+            </button>
+            <button id="drawerLogout" 
+                    style="background:transparent;border:1px solid var(--divider);color:var(--text);padding:10px 14px;border-radius:6px;font-weight:600;cursor:pointer; width: 100%;font-size:14px;margin-top:8px;display:none">
+                <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- LOGIN MODAL -->
+    <!-- ============================================ -->
+    <div id="loginModal" class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+        <div class="login-card">
+            <header class="login-header">
+                <h3 id="login-title" class="login-title">Admin Login</h3>
+                <p class="login-subtitle">Sign in to access admin features</p>
+            </header>
+            
+            <form id="loginForm" novalidate>
+                <div class="input-group">
+                    <label for="loginPassword">
+                        <i class="fas fa-lock" aria-hidden="true"></i> Password
+                    </label>
+                    <input type="password" 
+                           id="loginPassword" 
+                           class="login-input" 
+                           placeholder="Enter your password" 
+                           required
+                           aria-required="true"
+                           autocomplete="current-password">
+                    <button type="button" 
+                            id="togglePassword" 
+                            class="password-toggle"
+                            aria-label="Toggle password visibility">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+                <div class="login-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" id="forgotPassword" class="text-link">Forgot password?</a>
+                </div>
+                
+                <div class="login-actions">
+                    <button type="button" id="loginCancel" class="btn-ghost">Cancel</button>
+                    <button type="submit" id="loginSubmit" class="btn-primary">Sign In</button>
+                </div>
+            </form>
+            
+            <div class="security-notice">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                <span>Secure admin authentication</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TOAST NOTIFICATIONS -->
+    <!-- ============================================ -->
+    <div class="toast-wrap" id="toastWrap" role="alert" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ============================================ -->
+    <!-- OFFLINE INDICATOR -->
+    <!-- ============================================ -->
+    <div id="offlineIndicator" class="offline-indicator" role="alert" aria-live="assertive">
+        <i class="fas fa-wifi" aria-hidden="true"></i>
+        <span>You are currently offline</span>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SKIP TO CONTENT (Accessibility) -->
+    <!-- ============================================ -->
+    <a href="#main" class="skip-to-content">Skip to main content</a>
+
+    <!-- ============================================ -->
+    <!-- SCREEN READER ONLY TEXT (for better accessibility) -->
+    <!-- ============================================ -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+        }
+        
+        .skip-to-content:focus {
+            top: 0;
+        }
+    </style>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script type="module" src="./js/app.js"></script>
+    <script src="./js/notifications.js" defer></script>
+
+    <!-- ============================================ -->
+    <!-- PWA SERVICE WORKER REGISTRATION -->
+    <!-- ============================================ -->
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./js/service-worker.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content available, notify user
+                                    if (confirm('New version available! Reload to update?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Update copyright year
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearElement = document.getElementById('currentYear');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        });
+
+        // Analytics tracking (respect Do Not Track)
+        if (navigator.doNotTrack !== '1' && !window.doNotTrack) {
+            // Add your analytics code here (e.g., Google Analytics, Plausible, etc.)
+            console.log('Analytics enabled');
+        }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- NOSCRIPT FALLBACK -->
+    <!-- ============================================ -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; right: 0; background: #fbbf24; color: #000; padding: 15px; text-align: center; z-index: 10000;">
+            <strong>JavaScript is disabled.</strong> Some features may not work properly. Please enable JavaScript for the best experience.
+        </div>
+    </noscript>
 </body>
-</html>
+</html>-group">
+                    <label for="loginEmail">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Admin Email
+                    </label>
+                    <input type="email" 
+                           id="loginEmail" 
+                           class="login-input" 
+                           placeholder="Enter your admin email" 
+                           required
+                           aria-required="true"
+                           autocomplete="email">
+                </div>
+                
+                <div class="input
