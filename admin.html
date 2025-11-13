@@ -1,258 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel - GenZ Smart Management</title>
-  <!-- Favicon and PWA -->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#1d9bf0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.gstatic.com https://cdn.quilljs.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.quilljs.com;
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com;
+        frame-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    <meta name="referrer-policy" content="no-referrer-when-downgrade">
+    <meta name="X-Content-Type-Options" content="nosniff">
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Admin dashboard for GenZ Smart management and monitoring for 50K readers community." />
-  <meta name="keywords" content="admin, dashboard, genz smart, community management, site analytics" />
-  <meta name="author" content="Owais Ahmad" />
-  <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow">
 
-  <!-- Fonts and Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Quill Editor -->
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css" />
+    <title>Admin Panel — GenZ Smart Management</title>
+    
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d9bf0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="dark" data-page="admin">
-  <div class="container">
-    <!-- HEADER -->
+
+<div class="bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="container">
+
     <header>
-      <div class="brand">
-        <div class="logo">
-          <img src="assets/logo.png" alt="GenZ Smart Logo" style="width: 100px; border-radius: 12px;" />
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/logo.png" alt="GenZ Smart Logo" style="width:100%; border-radius:12px;"> [cite: 197]
+            </div>
+            <div class="brand-text">
+                <div class="site-title">GenZ Smart</div>
+                <div class="site-subtitle">Admin Panel</div> [cite: 198]
+            </div>
         </div>
-        <div class="brand-text">
-          <div class="site-title">GenZ Smart</div>
-          <div class="site-subtitle">Admin Dashboard</div>
+
+        <div class="header-actions">
+            <div class="online-status" id="onlineStatus" title="Online"> [cite: 199]
+                <div class="status-dot"></div>
+                <span>Online</span>
+            </div>
+
+            <div class="clock-container">
+                <div class="clock-time" id="clockTime">00:00:00</div>
+                <div class="clock-date" id="clockDate">Loading...</div> [cite: 199]
+            </div>
+            
+            <div class="notification-container">
+                <button id="notificationBell" class="icon-btn" title="Notifications" aria-label="View notifications"> [cite: 200]
+                    <i class="fas fa-bell" aria-hidden="true"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none">0</span> [cite: 200]
+                </button>
+            </div>
+
+            <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"> [cite: 201]
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <button id="menuBtn" class="icon-btn" title="Menu" aria-label="Open menu"> [cite: 201]
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
-      </div>
-      <div class="header-actions">
-        <div class="online-status" id="onlineStatus" title="Online">
-          <div class="status-dot"></div>
-          <span>Online</span>
-        </div>
-        <div class="clock-container">
-          <div id="clockTime" class="clock-time">00:00:00</div>
-          <div id="clockDate" class="clock-date">Loading...</div>
-        </div>
-        <button id="themeToggle" class="icon-btn" title="Toggle theme">
-          <i class="fas fa-sun"></i>
-        </button>
-        <button id="menuBtn" class="icon-btn" title="Menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
     </header>
 
-    <!-- NAVIGATION -->
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-      <a href="blog.html" class="nav-link"><i class="fas fa-book"></i> Blog</a>
-      <a href="comments.html" class="nav-link"><i class="fas fa-comments"></i> Comments</a>
-      <a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a>
-      <a href="analytics.html" class="nav-link"><i class="fas fa-chart-line"></i> Analytics</a>
-      <a href="admin.html" class="nav-link active" id="adminNavLink"><i class="fas fa-cog"></i> Admin</a>
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home" aria-hidden="true"></i> Home
+        </a>
+        <a href="blog.html" class="nav-link">
+            <i class="fas fa-book" aria-hidden="true"></i> Blog [cite: 202]
+        </a>
+        <a href="comments.html" class="nav-link">
+            <i class="fas fa-comments" aria-hidden="true"></i> Comments [cite: 203]
+        </a>
+        <a href="about.html" class="nav-link">
+            <i class="fas fa-user" aria-hidden="true"></i> About [cite: 203]
+        </a>
+        <a href="analytics.html" class="nav-link">
+            <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics [cite: 203]
+        </a>
+        <a href="admin.html" class="nav-link active" id="adminNavLink" aria-current="page"> [cite: 204]
+            <i class="fas fa-cog" aria-hidden="true"></i> Admin
+        </a>
     </nav>
 
-    <!-- ADMIN DASHBOARD CONTENT -->
-    <section class="section">
-      <div class="section-header">
-        <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
-        <p>Manage your content and monitor site performance for 50K readers</p>
-      </div>
-
-      <!-- Security Alert -->
-      <div class="security-alert" id="securityAlert" role="alert" style="display:none;">
-        <div class="alert-icon"><i class="fas fa-shield-alt"></i></div>
-        <div class="alert-content">
-          <h4>Admin Session Active</h4>
-          <p>You are logged in as administrator. Session will expire in <span id="sessionTimer">--:--</span></p>
-        </div>
-        <button class="alert-close" id="closeSecurityAlert" aria-label="Close security alert">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-
-      <!-- Admin Stats Cards -->
-      <div class="admin-stats-grid">
-        <div class="admin-stat-card">
-          <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
-          <div class="stat-info">
-            <div class="stat-value" id="adminPostCount">0</div>
-            <div class="stat-label">Total Posts</div>
-          </div>
-          <div class="stat-trend" id="postTrend"><i class="fas fa-arrow-up"></i> 0</div>
-        </div>
-
-        <div class="admin-stat-card">
-          <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
-          <div class="stat-info">
-            <div class="stat-value" id="adminTodayPosts">0</div>
-            <div class="stat-label">Today's Posts</div>
-          </div>
-          <div class="stat-trend" id="todayTrend"><i class="fas fa-minus"></i> 0</div>
-        </div>
-
-        <div class="admin-stat-card">
-          <div class="stat-icon"><i class="fas fa-heart"></i></div>
-          <div class="stat-info">
-            <div class="stat-value" id="adminLikes">0</div>
-            <div class="stat-label">Total Likes</div>
-          </div>
-          <div class="stat-trend" id="likesTrend"><i class="fas fa-arrow-up"></i> 0</div>
-        </div>
-
-        <div class="admin-stat-card">
-          <div class="stat-icon"><i class="fas fa-eye"></i></div>
-          <div class="stat-info">
-            <div class="stat-value" id="adminViews">0</div>
-            <div class="stat-label">Total Views</div>
-          </div>
-          <div class="stat-trend" id="viewsTrend"><i class="fas fa-arrow-up"></i> 0</div>
-        </div>
-      </div>
-
-      <!-- Admin Actions -->
-      <div class="admin-actions">
-        <button id="newPostBtn" class="btn-primary"><i class="fas fa-plus"></i> New Post</button>
-        <button id="schedulePostBtn" class="btn-ghost"><i class="fas fa-clock"></i> Schedule Post</button>
-        <button id="managePostsBtn" class="btn-ghost"><i class="fas fa-edit"></i> Manage Posts</button>
-        <button id="moderateCommentsBtn" class="btn-ghost"><i class="fas fa-comments"></i> Moderate Comments</button>
-        <button id="backupDataBtn" class="btn-ghost"><i class="fas fa-download"></i> Backup Data</button>
-        <button id="restoreDataBtn" class="btn-ghost"><i class="fas fa-upload"></i> Restore Data</button>
-        <button id="emailSubscribersBtn" class="btn-ghost"><i class="fas fa-envelope"></i> Email Subscribers</button>
-        <button id="seoOptimizeBtn" class="btn-ghost"><i class="fas fa-search"></i> SEO Tools</button>
-        <button id="logoutBtn" class="btn-ghost logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      </div>
-
-      <!-- Recent Activity -->
-      <div class="admin-activity">
-        <h2><i class="fas fa-history"></i> Recent Activity</h2>
-        <div id="adminActivityFeed" class="activity-feed">
-          <!-- Activity items loaded dynamically -->
-        </div>
-      </div>
-
-      <!-- Scheduled Posts -->
-      <div class="admin-section">
-        <div class="section-header">
-          <h2><i class="fas fa-clock"></i> Scheduled Posts</h2>
-          <p>Posts scheduled for future publication</p>
-        </div>
-        <div id="scheduledPosts" class="posts-grid">
-          <div class="empty-state"><i class="fas fa-clock"></i> No scheduled posts</div>
-        </div>
-      </div>
-
-      <!-- Email Subscribers -->
-      <div class="admin-section">
-        <div class="section-header">
-          <h2><i class="fas fa-envelope"></i> Email Subscribers</h2>
-          <p>Send updates to your 50K readers</p>
-        </div>
-        <div class="email-composer">
-          <div class="input-group">
-            <label for="emailSubject">Subject</label>
-            <input type="text" id="emailSubject" class="small-input" placeholder="Newsletter subject..." />
-          </div>
-          <div class="input-group">
-            <label for="emailMessage">Message</label>
-            <textarea id="emailMessage" class="small-input" rows="5" placeholder="Write your newsletter content..."></textarea>
-          </div>
-          <div class="email-actions">
-            <button id="sendEmail" class="btn-primary"><i class="fas fa-paper-plane"></i> Send to Subscribers</button>
-            <span class="email-count">50K subscribers</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Backup & Restore -->
-      <div class="admin-section">
-        <div class="section-header">
-          <h2><i class="fas fa-database"></i> Backup & Restore</h2>
-          <p>Manage your website data</p>
-        </div>
-        <div class="backup-actions">
-          <button id="fullBackup" class="btn-primary"><i class="fas fa-download"></i> Full Backup</button>
-          <button id="exportPosts" class="btn-ghost"><i class="fas fa-file-export"></i> Export Posts</button>
-          <button id="exportComments" class="btn-ghost"><i class="fas fa-comment-alt"></i> Export Comments</button>
-          <input type="file" id="restoreFile" accept=".json,.zip" style="display:none" />
-          <button id="triggerRestore" class="btn-ghost"><i class="fas fa-upload"></i> Restore Data</button>
-        </div>
-        <div class="backup-info">
-          <p><i class="fas fa-info-circle"></i> Last backup: <span id="lastBackup">Never</span></p>
-        </div>
-      </div>
-
-      <!-- SEO Tools -->
-      <div class="admin-section">
-        <div class="section-header">
-          <h2><i class="fas fa-search"></i> SEO Optimization</h2>
-          <p>Improve your search engine rankings</p>
-        </div>
-        <div class="seo-tools">
-          <div class="seo-stats">
-            <div class="seo-stat">
-              <div class="seo-value">95</div>
-              <div class="seo-label">SEO Score</div>
+    <main>
+        <section class="section" aria-labelledby="admin-title">
+            <div class="section-header">
+                <h1 id="admin-title"><i class="fas fa-cog" aria-hidden="true"></i> Admin Dashboard</h1>
+                <p>Manage your content and monitor site performance</p> [cite: 205]
             </div>
-            <div class="seo-stat">
-              <div class="seo-value">1.2s</div>
-              <div class="seo-label">Load Time</div>
+
+            <div class="security-alert" id="securityAlert" style="display: none;" role="alert"> [cite: 205]
+                <div class="alert-icon">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i> [cite: 205]
+                </div>
+                <div class="alert-content">
+                    <h4>Admin Session Active</h4> [cite: 206]
+                    <p>You are logged in as administrator. Session will expire in <span id="sessionTimer">60:00</span></p> [cite: 206]
+                </div>
+                <button class="alert-close" id="closeSecurityAlert" aria-label="Dismiss alert"> [cite: 207]
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="seo-stat">
-              <div class="seo-value">100%</div>
-              <div class="seo-label">Mobile Friendly</div>
+
+            <div class="admin-stats-grid" role="region" aria-label="Admin statistics"> [cite: 207]
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-newspaper" aria-hidden="true"></i></div> [cite: 208]
+                    <div class="stat-info">
+                        <div class="stat-value" id="adminPostCount">0</div> [cite: 208]
+                        <div class="stat-label">Total Posts</div>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-day" aria-hidden="true"></i></div> [cite: 210]
+                    <div class="stat-info">
+                        <div class="stat-value" id="adminTodayPosts">0</div> [cite: 211]
+                        <div class="stat-label">Today's Posts</div>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-heart" aria-hidden="true"></i></div> [cite: 213]
+                    <div class="stat-info">
+                        <div class="stat-value" id="adminLikes">0</div> [cite: 213]
+                        <div class="stat-label">Total Likes</div>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-eye" aria-hidden="true"></i></div> [cite: 215]
+                    <div class="stat-info">
+                        <div class="stat-value" id="adminViews">0</div> [cite: 216]
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-comments" aria-hidden="true"></i></div> [cite: 217]
+                    <div class="stat-info">
+                        <div class="stat-value" id="adminComments">0</div> [cite: 218]
+                        <div class="stat-label">Total Comments</div>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div> [cite: 220]
+                    <div class="stat-info">
+                        <div class="stat-value">50K+</div> [cite: 220]
+                        <div class="stat-label">Total Readers</div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="seo-actions">
-            <button id="generateSitemap" class="btn-ghost"><i class="fas fa-sitemap"></i> Generate Sitemap</button>
-            <button id="analyzeSEO" class="btn-ghost"><i class="fas fa-chart-bar"></i> Analyze SEO</button>
-            <button id="metaTags" class="btn-ghost"><i class="fas fa-tags"></i> Meta Tags</button>
-          </div>
+
+            <div class="admin-actions" role="region" aria-label="Admin quick actions"> [cite: 222]
+                <h2><i class="fas fa-bolt" aria-hidden="true"></i> Quick Actions</h2>
+                <div class="action-buttons">
+                    <button id="newPostBtn" class="btn-primary">
+                        <i class="fas fa-plus" aria-hidden="true"></i> New Post
+                    </button> [cite: 222]
+                    <button id="schedulePostBtn" class="btn-ghost">
+                        <i class="fas fa-clock" aria-hidden="true"></i> Schedule Post
+                    </button> [cite: 223]
+                    <button id="managePostsBtn" class="btn-ghost">
+                        <i class="fas fa-edit" aria-hidden="true"></i> Manage Posts
+                    </button> [cite: 223]
+                    <button id="moderateCommentsBtn" class="btn-ghost">
+                        <i class="fas fa-comments" aria-hidden="true"></i> Moderate Comments
+                    </button> [cite: 224]
+                    <button id="backupDataBtn" class="btn-ghost">
+                        <i class="fas fa-download" aria-hidden="true"></i> Backup Data
+                    </button> [cite: 224]
+                    <button id="restoreDataBtn" class="btn-ghost">
+                        <i class="fas fa-upload" aria-hidden="true"></i> Restore Data
+                    </button> [cite: 225]
+                    <button id="emailSubscribersBtn" class="btn-ghost">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Email Subscribers
+                    </button> [cite: 226]
+                    <button id="seoOptimizeBtn" class="btn-ghost">
+                        <i class="fas fa-search" aria-hidden="true"></i> SEO Tools
+                    </button> [cite: 226]
+                    <button id="logoutBtn" class="btn-ghost logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                    </button> [cite: 227]
+                </div>
+            </div>
+
+            <div id="composer" class="composer" style="display:none" role="region" aria-label="Post composer"> [cite: 227]
+                <div class="composer-header">
+                    <h3><i class="fas fa-edit" aria-hidden="true"></i> Create New Post</h3>
+                    <button id="closeComposer" class="icon-btn" aria-label="Close composer">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button> [cite: 228]
+                </div>
+                
+                <div class="comp-row">
+                    <div class="comp-avatar">
+                        <img src="assets/your-photo.jpg" alt="Owais Ahmad" style="width:100%;border-radius:50%;"> [cite: 229]
+                    </div>
+                    <div class="comp-box">
+                        <div class="comp-title">
+                            <input id="composeTitle" class="small-input" placeholder="Post Title (optional)" aria-label="Post Title"> [cite: 230]
+                            <input id="composeImage" class="small-input" placeholder="Image URL (optional)" aria-label="Image URL"> [cite: 230]
+                        </div>
+                        
+                        <div class="category-selector" role="radiogroup" aria-label="Select post category"> [cite: 231]
+                            <div class="category-option selected" data-category="thoughts" role="radio" aria-checked="true" tabindex="0">Thoughts</div> [cite: 231]
+                            <div class="category-option" data-category="tech" role="radio" aria-checked="false" tabindex="-1">Tech</div> [cite: 232]
+                            <div class="category-option" data-category="motivation" role="radio" aria-checked="false" tabindex="-1">Motivation</div> [cite: 232]
+                            <div class="category-option" data-category="ideas" role="radio" aria-checked="false" tabindex="-1">Ideas</div> [cite: 232]
+                            <div class="category-option" data-category="life" role="radio" aria-checked="false" tabindex="-1">Life</div> [cite: 232]
+                            <div class="category-option" data-category="community" role="radio" aria-checked="false" tabindex="-1">Community</div> [cite: 233]
+                        </div>
+                        
+                        <div class="post-options"> [cite: 234]
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pinPost"> [cite: 234]
+                                <span class="checkmark"></span>
+                                Pin this post [cite: 235]
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="schedulePost"> [cite: 236]
+                                <span class="checkmark"></span>
+                                Schedule post
+                            </label>
+                            <div id="scheduleOptions" style="display: none;"> [cite: 237]
+                                <input type="datetime-local" id="scheduleTime" class="small-input" aria-label="Schedule time"> [cite: 238]
+                            </div>
+                        </div>
+                        
+                        <div id="editor-container" aria-label="Post content editor"></div> [cite: 239]
+                        
+                        <div class="comp-meta">
+                            <div>Publishing as <strong>GenZ Owais</strong></div> [cite: 239]
+                            <div style="display:flex;gap:10px; flex-wrap: wrap;"> [cite: 240]
+                                <button id="saveDraft" class="btn-ghost">Save Draft</button> [cite: 241]
+                                <button id="previewPost" class="btn-ghost">Preview</button> [cite: 241]
+                                <button id="cancelCompose" class="btn-ghost">Cancel</button> [cite: 241]
+                                <button id="publishBtn" class="btn-primary"><i class="fas fa-paper-plane" aria-hidden="true"></i> Publish Now</button> [cite: 242]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-activity" role="region" aria-labelledby="activity-title"> [cite: 243]
+                <h2 id="activity-title"><i class="fas fa-history" aria-hidden="true"></i> Recent Activity</h2>
+                <div id="adminActivityFeed" class="activity-feed" aria-live="polite">
+                    </div>
+            </div>
+
+            <div class="admin-section" role="region" aria-labelledby="scheduled-title"> [cite: 244]
+                <div class="section-header">
+                    <h2 id="scheduled-title"><i class="fas fa-clock" aria-hidden="true"></i> Scheduled Posts</h2>
+                    <p>Posts scheduled for future publication</p>
+                </div>
+                <div id="scheduledPosts" class="posts-grid">
+                    <div class="empty-state">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <p>No scheduled posts</p> [cite: 245]
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-section" role="region" aria-labelledby="email-title"> [cite: 246]
+                <div class="section-header">
+                    <h2 id="email-title"><i class="fas fa-envelope" aria-hidden="true"></i> Email Subscribers</h2>
+                    <p>Send updates to your 50K+ readers</p>
+                </div>
+                <div class="email-composer">
+                    <div class="input-group">
+                        <label for="emailSubject">Subject</label> [cite: 247]
+                        <input type="text" id="emailSubject" class="small-input" placeholder="Newsletter subject...">
+                    </div>
+                    <div class="input-group">
+                        <label for="emailMessage">Message</label> [cite: 248]
+                        <textarea id="emailMessage" class="small-input" rows="5" placeholder="Write your newsletter content..."></textarea>
+                    </div>
+                    <div class="email-actions">
+                        <button id="sendEmail" class="btn-primary">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send to Subscribers [cite: 249]
+                        </button>
+                        <span class="email-count">50K+ subscribers</span> [cite: 249]
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-section" role="region" aria-labelledby="seo-title"> [cite: 250]
+                <div class="section-header">
+                    <h2 id="seo-title"><i class="fas fa-search" aria-hidden="true"></i> SEO Optimization</h2>
+                    <p>Improve your search engine rankings</p>
+                </div>
+                <div class="seo-tools">
+                    <div class="seo-actions">
+                        <button id="generateSitemap" class="btn-ghost">
+                            <i class="fas fa-sitemap" aria-hidden="true"></i> Generate Sitemap [cite: 254]
+                        </button>
+                        <button id="analyzeSEO" class="btn-ghost">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i> Analyze SEO [cite: 255]
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-section" role="region" aria-labelledby="backup-title"> [cite: 256]
+                <div class="section-header">
+                    <h2 id="backup-title"><i class="fas fa-database" aria-hidden="true"></i> Backup & Restore</h2>
+                    <p>Manage your website data</p> [cite: 257]
+                </div>
+                <div class="backup-actions">
+                    <button id="fullBackup" class="btn-primary">
+                        <i class="fas fa-download" aria-hidden="true"></i> Full Backup [cite: 257]
+                    </button>
+                    <button id="exportPosts" class="btn-ghost">
+                        <i class="fas fa-file-export" aria-hidden="true"></i> Export Posts [cite: 258]
+                    </button>
+                    <button id="exportComments" class="btn-ghost">
+                        <i class="fas fa-comment-export" aria-hidden="true"></i> Export Comments [cite: 259]
+                    </button>
+                    <input type="file" id="restoreFile" accept=".json,.zip" style="display: none;" aria-hidden="true"> [cite: 259]
+                    <button id="triggerRestore" class="btn-ghost">
+                        <i class="fas fa-upload" aria-hidden="true"></i> Restore Data [cite: 260]
+                    </button>
+                </div>
+                <div class="backup-info">
+                    <p><i class="fas fa-info-circle" aria-hidden="true"></i> Last backup: <span id="lastBackup">Never</span></p> [cite: 260]
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="width:30px;height:30px;font-size:12px;">GZ</div>
+                <span>GenZ Smart</span> [cite: 261]
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="comments.html">Comments</a>
+                <a href="about.html">About</a>
+                <a href="analytics.html">Analytics</a>
+                <a href="settings.html">Settings</a> [cite: 262]
+            </div>
+            <div class="footer-copyright">
+                © <span id="currentYear">2025</span> GenZ Smart Blog — All rights reserved [cite: 263]
+            </div>
         </div>
-      </div>
-    </section>
+    </footer>
+</div>
 
-    <!-- Toast notifications container -->
-    <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
-
-    <!-- Offline Indicator -->
-    <div id="offlineIndicator" class="offline-indicator" role="alert" style="display:none;">
-      <i class="fas fa-wifi"></i> <span>You are currently offline</span>
+<div id="drawerBackdrop" class="drawer-backdrop" style="display:none"></div>
+<nav id="drawer" class="drawer" style="left: -100%;">
+    <button id="closeDrawer" class="drawer-close" aria-label="Close menu">✕</button>
+    <div class="drawer-content">
+        <div class="drawer-title">GenZ Smart</div> [cite: 270]
+        
+        <div class="clock-container" style="margin:15px 0;" id="drawerClock"> [cite: 271]
+            <div class="clock-time" id="drawerClockTime">00:00:00</div>
+            <div class="clock-date" id="drawerClockDate">Loading...</div>
+        </div>
+        
+        <a href="index.html" class="drawer-link"><i class="fas fa-home" aria-hidden="true"></i> Home</a> [cite: 272]
+        <a href="blog.html" class="drawer-link"><i class="fas fa-book" aria-hidden="true"></i> Blog</a> [cite: 273]
+        <a href="comments.html" class="drawer-link"><i class="fas fa-comments" aria-hidden="true"></i> Comments</a> [cite: 273]
+        <a href="about.html" class="drawer-link"><i class="fas fa-user" aria-hidden="true"></i> About</a> [cite: 275]
+        <a href="analytics.html" class="drawer-link"><i class="fas fa-chart-line" aria-hidden="true"></i> Analytics</a> [cite: 276]
+        <a href="admin.html" id="adminDrawerLink" class="drawer-link" style="display:none"><i class="fas fa-cog" aria-hidden="true"></i> Admin</a> [cite: 276]
+        
+        <div class="drawer-divider"></div>
+        
+        <button id="openLoginDrawer" class="btn-primary" style="width: 100%; display: none;"><i class="fas fa-lock" aria-hidden="true"></i> Admin Login</button>
+        <button id="drawerLogout" class="btn-ghost" style="width: 100%; margin-top: 8px;"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</button> [cite: 277]
     </div>
-  </div>
+</nav>
 
-  <!-- Quill Editor -->
-  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<div id="loginModal" class="login-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="login-title-admin">
+    </div>
 
-  <!-- Scripts -->
-  <script type="module" src="js/admin.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/notifications.js"></script>
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
-  <!-- Service Worker registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('js/service-worker.js').then(() => {
-        console.log('Service Worker registered');
-      }).catch((err) => {
-        console.error('Service Worker registration failed', err);
-      });
-    }
-  </script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
